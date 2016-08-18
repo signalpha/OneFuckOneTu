@@ -150,7 +150,7 @@
             this.skinTextBox1.Name = "skinTextBox1";
             this.skinTextBox1.NormlBack = null;
             this.skinTextBox1.Padding = new System.Windows.Forms.Padding(5);
-            this.skinTextBox1.ReadOnly = false;
+            this.skinTextBox1.ReadOnly = true;
             this.skinTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.skinTextBox1.Size = new System.Drawing.Size(355, 28);
             // 
@@ -161,6 +161,7 @@
             this.skinTextBox1.SkinTxt.Font = new System.Drawing.Font("微软雅黑", 9.75F);
             this.skinTextBox1.SkinTxt.Location = new System.Drawing.Point(5, 5);
             this.skinTextBox1.SkinTxt.Name = "BaseText";
+            this.skinTextBox1.SkinTxt.ReadOnly = true;
             this.skinTextBox1.SkinTxt.Size = new System.Drawing.Size(345, 18);
             this.skinTextBox1.SkinTxt.TabIndex = 0;
             this.skinTextBox1.SkinTxt.Text = "skinTextBox1";

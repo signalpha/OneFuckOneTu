@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,17 +45,6 @@ namespace BingWallpaper
 
 
 
-        //保存文件
-        public static void SaveFile(string path,string filename)
-        {
-
-        }
-
-        //保存文件
-        public static void SaveFile(string filepath)
-        {
-            
-        }
 
     }
 }
