@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -28,14 +29,8 @@ namespace BingWallpaper
 
             //将图片并显示到pictureBox上
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(imageurl);
-            System.IO.Stream s = request.GetResponse().GetResponseStream();
-            pictureBox1.Image = System.Drawing.Bitmap.FromStream(s);
-
-            //读取用户配置
-
-
-            
-            
+            Stream s = request.GetResponse().GetResponseStream();
+            pictureBox1.Image = Image.FromStream(s);
 
         }
 
@@ -53,9 +48,14 @@ namespace BingWallpaper
             }
         }
 
+
+       
         private void 设置图片为背景ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+            string a = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + @"\bing每日美图\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
+
+            SetWallpaper(a);
         }
 
         
@@ -79,19 +79,26 @@ namespace BingWallpaper
                 {
 
                     string path = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + @"\bing每日美图\";
+                    string Image = path + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
 
                     //目录不存在就创建
-                    if (Directory.Exists(path))
+                    if (!Directory.Exists(path))
                     {
-                        pictureBox1.Image.Save(path + DateTime.Now.ToString("yyyyMMdd") + ".jpg");
+                        Directory.CreateDirectory(path);
+                    }
+
+                    
+                    //图片不存在才保存
+                    if (!Directory.Exists(path))
+                    {
+                        pictureBox1.Image.Save(Image);
                         MessageBox.Show("保存成功");
                     }
                     else
                     {
-                        Directory.CreateDirectory(path);
-                        pictureBox1.Image.Save(path + DateTime.Now.ToString("yyyyMMdd") + ".jpg");
-                        MessageBox.Show("保存成功");
+                        MessageBox.Show("图片已存在");
                     }
+
 
                 }
                 else
@@ -130,9 +137,6 @@ namespace BingWallpaper
         }
 
 
-
-
-
         //解析网页图片地址
         public String UrlProcessing()
         {
@@ -162,11 +166,12 @@ namespace BingWallpaper
             return ImageUrl;
         }
 
-        
+
+    
 
 
         //用户配置信息处理
-        private void UserConfigProcessing()
+        public void UserConfigProcessing()
         {
             
             string BootOpen = AppConfig.GetConfigValue("bootopen");
@@ -176,7 +181,13 @@ namespace BingWallpaper
 
 
         }
-
+        
+        [DllImport("user32.dll")]
+        private static extern bool SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
+        public static void SetWallpaper(string path)
+        {
+            SystemParametersInfo(20, 0, path, 0x01 | 0x02);
+        }
 
     }
 }
