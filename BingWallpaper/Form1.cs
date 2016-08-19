@@ -51,31 +51,26 @@ namespace BingWallpaper
 
         private void 设置图片为背景ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+ 
             string path = "";
             string ImagePath = AppConfig.GetConfigValue("imagepath");
             string UpdateSave = AppConfig.GetConfigValue("updatesave");
 
-
-            if (String.Equals(UpdateSave,"1"))
+            if (String.Equals(UpdateSave, "1"))
             {
                 path = ImagePath + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
                 SetWallpaper(path);
+                MessageBox.Show("壁纸自动保存，不用删除");
             }
-            else if (String.Equals(ImagePath, "0") || ImagePath.Length < 3)
+            else 
             {
-                path = Application.ExecutablePath + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
+                path = path = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
                 pictureBox1.Image.Save(path);
                 SetWallpaper(path);
                 System.IO.File.Delete(path);
+                MessageBox.Show("壁纸没有自动保存，存了删");
             }
-            else
-            {
-                path = ImagePath + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
-                pictureBox1.Image.Save(path);
-                SetWallpaper(path);
-                System.IO.File.Delete(path);
-            }
-
+           
         }
 
         private void 保存图片到目录ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -193,7 +188,7 @@ namespace BingWallpaper
 
 
         //调用Windows API，从DLL中导出函数（使用DllImport特性，需要引入System.Runtime.InteropServices命名空间）
-        //即声明一个外部函数。
+        //即声明一个外部函  数。
         [DllImport("user32.dll")]
         private static extern bool SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
         public static void SetWallpaper(string path)
