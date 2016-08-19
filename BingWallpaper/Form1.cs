@@ -35,6 +35,7 @@ namespace BingWallpaper
 
             //加载配置
             UserConfigProcessing();
+            
 
         }
 
@@ -56,10 +57,10 @@ namespace BingWallpaper
         {
  
             string path = "";
-            string ImagePath = AppConfig.GetConfigValue("imagepath");
-            string UpdateSave = AppConfig.GetConfigValue("updatesave");
+            string ImagePath = Properties.Settings.Default.ImagePath;
 
-            if (String.Equals(UpdateSave, "1"))
+            //先判断自动保存有没有被勾选
+            if (Properties.Settings.Default.SaveImage)
             {
                 path = ImagePath + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
                 SetWallpaper(path);
@@ -67,7 +68,7 @@ namespace BingWallpaper
             }
             else 
             {
-                path = path = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
+                path = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
                 pictureBox1.Image.Save(path);
                 SetWallpaper(path);
                 System.IO.File.Delete(path);
@@ -78,17 +79,15 @@ namespace BingWallpaper
 
         private void 保存图片到目录ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string ImagePath = AppConfig.GetConfigValue("imagepath");
-            string UpdateSave = AppConfig.GetConfigValue("updatesave");
 
             //先判断自动保存壁纸有没有被勾选
-            if (String.Equals(UpdateSave, "1"))
+            if (Properties.Settings.Default.SaveImage)
             {
                 //如果有，判断图片是否保存过，保存过则提示已经存
                 IamgeExists();
             }
-            //如果没被勾选，则判断是否定义了路径，如果有，保存到路径。
-            else if (ImagePath.Length > 2)
+            //如果没选，判断路径是否设置了
+            else if (Properties.Settings.Default.ImagePath.Length > 2)
             {
                 IamgeExists();
             }
@@ -96,6 +95,21 @@ namespace BingWallpaper
             {
                 另存为ToolStripMenuItem_Click(null, null);
             }
+
+            //if (Properties.Settings.Default.SaveImage && Properties.Settings.Default.ImagePath.Length > 2)
+            //{
+            //    //如果有，判断图片是否保存过，保存过则提示已经存
+            //    IamgeExists();
+            //}
+            ////如果被勾选了，却没设路径，
+            //else if (Properties.Settings.Default.SaveImage && Properties.Settings.Default.ImagePath.Length < 2)
+            //{
+            //    MessageBox.Show("勾选了自动保存壁纸需要先设置路径");
+            //}
+            //else
+            //{
+            //    另存为ToolStripMenuItem_Click(null, null);
+            //}
 
         }
 
@@ -149,20 +163,14 @@ namespace BingWallpaper
         public void UserConfigProcessing()
         {
             
-            string BootOpen = AppConfig.GetConfigValue("bootopen");
-            string UpdateSave = AppConfig.GetConfigValue("updatesave");
-            string UpdateExit = AppConfig.GetConfigValue("updateexit");
-
-            
-
             //自动保存图片被勾选
-            if (String.Equals(UpdateSave, "1"))
+            if (Properties.Settings.Default.SaveImage)
             {
                 IamgeExists();
             }
 
             //更新壁纸自动退出被勾选
-            if (String.Equals(UpdateExit, "1"))
+            if (Properties.Settings.Default.UpdateClose)
             {
                 //if (IamgeExists() == 2)
                 //{
@@ -173,7 +181,7 @@ namespace BingWallpaper
             }
 
             //开机启动被勾选
-            if (String.Equals(BootOpen, "1"))
+            if (Properties.Settings.Default.BootOpen)
             {
                 string strAssName = Application.StartupPath + @"\" + Application.ProductName + @".exe";
                 string Appname = Application.ProductName;
@@ -182,7 +190,7 @@ namespace BingWallpaper
             }
 
             //关闭开机启动项
-            if (String.Equals(BootOpen, "0"))
+            if (!Properties.Settings.Default.BootOpen)
             {
                 string Appname = Application.ProductName;
                 OnBoot o = new OnBoot();
@@ -204,7 +212,7 @@ namespace BingWallpaper
         public int IamgeExists()
         {
 
-            string ImagePath = AppConfig.GetConfigValue("imagepath");
+            string ImagePath = Properties.Settings.Default.ImagePath;
             string Image = ImagePath + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
 
             try

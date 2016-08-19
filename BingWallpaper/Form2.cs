@@ -24,6 +24,8 @@ namespace BingWallpaper
             //加载用户配置
             UserConfig();
 
+            Tips(skinCheckBox1, "如果你希望每天换一张壁纸，请勾选它。");
+            Tips(skinCheckBox2, "需先设置保存目录，应用。每天保存一张壁纸，设置幻灯片放映也是个不错的选择");
         }
 
 
@@ -41,117 +43,90 @@ namespace BingWallpaper
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string PathValue = skinTextBox1.Text;
-            AppConfig.UpdateConfig("imagepath", PathValue);
+
+            //保存目录
+            Properties.Settings.Default.ImagePath = skinTextBox1.Text;
 
 
             //开机启动
             if (skinCheckBox1.Checked)
-            {
-                AppConfig.UpdateConfig("bootopen", "1");
-            }
+                Properties.Settings.Default.BootOpen = true;
             else
-            {
-                AppConfig.UpdateConfig("bootopen", "0");
-            }
+                Properties.Settings.Default.BootOpen = false;
 
 
             //更新壁纸保存
             if (skinCheckBox2.Checked)
-            {
-                AppConfig.UpdateConfig("updatesave", "1");
-            }
+                Properties.Settings.Default.SaveImage = true;
             else
-            {
-                AppConfig.UpdateConfig("updatesave", "0");
-            }
-
+                Properties.Settings.Default.SaveImage = false;
 
 
             //更新壁纸退出
             if (skinCheckBox3.Checked)
-            {
-                AppConfig.UpdateConfig("updateexit", "1");
-            }
+                Properties.Settings.Default.UpdateClose = true;
             else
-            {
-                AppConfig.UpdateConfig("updateexit", "0");
-            }
+                Properties.Settings.Default.UpdateClose = false;
+
 
             //自动更新
             if (skinCheckBox4.Checked)
-            {
-                AppConfig.UpdateConfig("updateversion", "1");
-            }
+                Properties.Settings.Default.Update = true;
             else
-            {
-                AppConfig.UpdateConfig("updateversion", "0");
-            }
+                Properties.Settings.Default.Update = false;
 
         }
 
 
+        public void Tips(CheckBox Checkbox,string TipsContent)
+        {
+            ToolTip ttpSettings = new ToolTip();
+            ttpSettings.InitialDelay = 200;
+            ttpSettings.AutoPopDelay = 10 * 1000;
+            ttpSettings.ReshowDelay = 200;
+            ttpSettings.ShowAlways = true;
+            ttpSettings.IsBalloon = true;
+            ttpSettings.SetToolTip(Checkbox, TipsContent);
+        }
 
-
+        //用户配置
         public void UserConfig()
         {
 
-            string ImagePath = AppConfig.GetConfigValue("imagepath");
-            string BootOpen = AppConfig.GetConfigValue("bootopen");
-            string UpdateSave = AppConfig.GetConfigValue("updatesave");
-            string UpdateExit = AppConfig.GetConfigValue("updateexit");
-            string UpdateVersion = AppConfig.GetConfigValue("updateversion");
-
-            if (String.Equals(ImagePath, ""))
-            {
+            //保存目录
+            if (String.Equals(Properties.Settings.Default.ImagePath, ""))
                 skinTextBox1.Text = "";
-            }
             else
-            {
-                skinTextBox1.Text = ImagePath;
-            }
+                skinTextBox1.Text = Properties.Settings.Default.ImagePath;
+
 
             //开机启动
-            if (String.Equals(BootOpen, "0"))
-            {
-                 skinCheckBox1.Checked = false;
-            }
+            if (Properties.Settings.Default.BootOpen)
+                skinCheckBox1.Checked = true;
             else
-            {
-                 skinCheckBox1.Checked = true;
-            }
+                skinCheckBox1.Checked = false;
+            
 
             //自动保存壁纸
-            if (String.Equals(UpdateSave, "0"))
-            {
-                 skinCheckBox2.Checked = false;
-            }
+            if (Properties.Settings.Default.SaveImage)
+                skinCheckBox2.Checked = true;
             else
-            {
-                 skinCheckBox2.Checked = true;
-            }
+                skinCheckBox2.Checked = false;
 
             //更新壁纸自动推出
-            if (String.Equals(UpdateExit, "0"))
-            {
-                 skinCheckBox3.Checked = false;
-            }
+            if (Properties.Settings.Default.UpdateClose)
+                skinCheckBox3.Checked = true;
             else
-            {
-                 skinCheckBox3.Checked = true;
-            }
+                skinCheckBox3.Checked = false;
 
             //更新推送
-            if (String.Equals(UpdateVersion, "0"))
-            {
-                skinCheckBox4.Checked = false;
-            }
-            else
-            {
+            if (Properties.Settings.Default.Update)
                 skinCheckBox4.Checked = true;
-            }
+            else
+                skinCheckBox4.Checked = false;
 
         }
+
 
     }
 }
