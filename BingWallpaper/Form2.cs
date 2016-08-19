@@ -75,6 +75,8 @@ namespace BingWallpaper
             else
                 Properties.Settings.Default.Update = false;
 
+            Properties.Settings.Default.Save();
+
         }
 
 

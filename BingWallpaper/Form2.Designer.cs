@@ -48,9 +48,9 @@
             this.skinLabel1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.skinLabel1.Location = new System.Drawing.Point(12, 24);
             this.skinLabel1.Name = "skinLabel1";
-            this.skinLabel1.Size = new System.Drawing.Size(12, 17);
+            this.skinLabel1.Size = new System.Drawing.Size(84, 17);
             this.skinLabel1.TabIndex = 0;
-            this.skinLabel1.Text = " ";
+            this.skinLabel1.Text = " 图片保存目录";
             // 
             // button1
             // 
