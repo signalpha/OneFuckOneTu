@@ -25,13 +25,16 @@ namespace BingWallpaper
         public Form1()
         {
             InitializeComponent();
+            
             String imageurl = UrlProcessing();
-
             //将图片并显示到pictureBox上
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(imageurl);
             Stream s = request.GetResponse().GetResponseStream();
             pictureBox1.Image = Image.FromStream(s);
             s.Close();
+
+            //加载配置
+            UserConfigProcessing();
 
         }
 
@@ -60,7 +63,7 @@ namespace BingWallpaper
             {
                 path = ImagePath + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
                 SetWallpaper(path);
-                MessageBox.Show("壁纸自动保存，不用删除");
+                //MessageBox.Show("壁纸自动保存，不用删除");
             }
             else 
             {
@@ -68,7 +71,7 @@ namespace BingWallpaper
                 pictureBox1.Image.Save(path);
                 SetWallpaper(path);
                 System.IO.File.Delete(path);
-                MessageBox.Show("壁纸没有自动保存，存了删");
+                //MessageBox.Show("壁纸没有自动保存，存了删");
             }
            
         }
@@ -76,56 +79,24 @@ namespace BingWallpaper
         private void 保存图片到目录ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string ImagePath = AppConfig.GetConfigValue("imagepath");
+            string UpdateSave = AppConfig.GetConfigValue("updatesave");
 
-            //
-            try
+            //先判断自动保存壁纸有没有被勾选
+            if (String.Equals(UpdateSave, "1"))
             {
-                //判断是否有图片
-                if (pictureBox1.Image == null)
-                {
-                    MessageBox.Show("图片获取失败，软件炸了");
-                    Close();
-                }
-
-                //判断保存路径有没有被自定义
-                if (String.Equals(ImagePath, "0") || ImagePath.Length < 3)
-                {
-
-                    string path = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + @"\bing每日美图\";
-                    string Image = path + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
-
-                    //目录不存在就创建
-                    if (!Directory.Exists(path))
-                    {
-                        Directory.CreateDirectory(path);
-                    }
-
-
-                    //图片不存在才保存
-                    if (!Directory.Exists(path))
-                    {
-                        pictureBox1.Image.Save(Image);
-                        MessageBox.Show("保存成功");
-                    }
-                    else
-                    {
-                        MessageBox.Show("图片已存在");
-                    }
-
-
-                }
-                else
-                {
-                    pictureBox1.Image.Save(ImagePath + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg");
-                    MessageBox.Show("保存成功");
-                }
-
-
+                //如果有，判断图片是否保存过，保存过则提示已经存
+                IamgeExists();
             }
-            catch
+            //如果没被勾选，则判断是否定义了路径，如果有，保存到路径。
+            else if (ImagePath.Length > 2)
             {
-                MessageBox.Show("保存失败，也许是自定义路径不存在");
+                IamgeExists();
             }
+            else
+            {
+                另存为ToolStripMenuItem_Click(null, null);
+            }
+
         }
 
         private void 另存为ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -179,11 +150,96 @@ namespace BingWallpaper
         {
             
             string BootOpen = AppConfig.GetConfigValue("bootopen");
-            string AutoUpdate = AppConfig.GetConfigValue("autoupdate");
             string UpdateSave = AppConfig.GetConfigValue("updatesave");
             string UpdateExit = AppConfig.GetConfigValue("updateexit");
 
+            
 
+            //自动保存图片被勾选
+            if (String.Equals(UpdateSave, "1"))
+            {
+                IamgeExists();
+            }
+
+            //更新壁纸自动退出被勾选
+            if (String.Equals(UpdateExit, "1"))
+            {
+                //if (IamgeExists() == 2)
+                //{
+                //    设置图片为背景ToolStripMenuItem_Click(null, null);
+                //    Close();
+                //    //Dispose();
+                //}
+            }
+
+            //开机启动被勾选
+            if (String.Equals(BootOpen, "1"))
+            {
+                string strAssName = Application.StartupPath + @"\" + Application.ProductName + @".exe";
+                string Appname = Application.ProductName;
+                OnBoot o = new OnBoot();
+                o.On(strAssName, Appname);
+            }
+
+            //关闭开机启动项
+            if (String.Equals(BootOpen, "0"))
+            {
+                string Appname = Application.ProductName;
+                OnBoot o = new OnBoot();
+                o.Off(Appname);
+            }
+
+        }
+
+
+        /// <summary>
+        /// 用以判断图片是否存在
+        ///     返回值0：无自定义路径，无图片
+        ///     返回值1：有自定义路径，无图片，会自动保存图片
+        ///     返回值2：有自定义路径，有图片，用以判断是否当天第一次运行    
+        /// </summary>
+        /// <returns>
+        /// 
+        /// </returns>
+        public int IamgeExists()
+        {
+
+            string ImagePath = AppConfig.GetConfigValue("imagepath");
+            string Image = ImagePath + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
+
+            try
+            {
+                //判断是否有下载到图片
+                if (pictureBox1.Image == null)
+                {
+                    MessageBox.Show("图片获取失败，软件炸了");
+                    return 0;
+                }
+
+                //判断路径有没有定义
+                if (ImagePath.Length <= 2)
+                {
+                    return 0;
+                }
+
+                //判断图片是否已存在
+                if (System.IO.File.Exists(Image))
+                {
+                    //图片存在
+                    return 2;
+                }
+                else
+                {
+                    //图片不存在
+                    pictureBox1.Image.Save(Image);
+                    return 1;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("自定义路径不存在");
+                return 0;
+            }
         }
 
 
@@ -196,5 +252,6 @@ namespace BingWallpaper
             SystemParametersInfo(20, 0, path, 0x01 | 0x02);
         }
 
+        
     }
 }

@@ -47,7 +47,7 @@
             this.另存为ToolStripMenuItem,
             this.设置ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 114);
             // 
             // 设置图片为背景ToolStripMenuItem
             // 

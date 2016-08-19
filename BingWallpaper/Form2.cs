@@ -56,20 +56,8 @@ namespace BingWallpaper
             }
 
 
-            //自动更新壁纸
-            if (skinCheckBox2.Checked)
-            {
-                AppConfig.UpdateConfig("autoupdate", "1");
-            }
-            else
-            {
-                AppConfig.UpdateConfig("autoupdate", "0");
-            }
-
-
-
             //更新壁纸保存
-            if (skinCheckBox3.Checked)
+            if (skinCheckBox2.Checked)
             {
                 AppConfig.UpdateConfig("updatesave", "1");
             }
@@ -81,7 +69,7 @@ namespace BingWallpaper
 
 
             //更新壁纸退出
-            if (skinCheckBox4.Checked)
+            if (skinCheckBox3.Checked)
             {
                 AppConfig.UpdateConfig("updateexit", "1");
             }
@@ -90,26 +78,18 @@ namespace BingWallpaper
                 AppConfig.UpdateConfig("updateexit", "0");
             }
 
-
-            this.Close();
-
-            //软件自动更新
-            //if (skinCheckBox5.Checked)
-            //{
-            //    AppConfig.UpdateConfig("updateexit", "1");
-            //}
-            //else
-            //{
-            //    AppConfig.UpdateConfig("updateexit", "0");
-            //}
+            //自动更新
+            if (skinCheckBox4.Checked)
+            {
+                AppConfig.UpdateConfig("updateversion", "1");
+            }
+            else
+            {
+                AppConfig.UpdateConfig("updateversion", "0");
+            }
 
         }
 
-        //当窗口关闭时
-        private void Form2_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            
-        }
 
 
 
@@ -118,21 +98,20 @@ namespace BingWallpaper
 
             string ImagePath = AppConfig.GetConfigValue("imagepath");
             string BootOpen = AppConfig.GetConfigValue("bootopen");
-            string AutoUpdate = AppConfig.GetConfigValue("autoupdate");
             string UpdateSave = AppConfig.GetConfigValue("updatesave");
             string UpdateExit = AppConfig.GetConfigValue("updateexit");
+            string UpdateVersion = AppConfig.GetConfigValue("updateversion");
 
-            if (String.Equals(ImagePath, "0"))
+            if (String.Equals(ImagePath, ""))
             {
-                 skinTextBox1.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + "\\bing每日美图";
+                skinTextBox1.Text = "";
             }
             else
             {
-                 skinTextBox1.Text = AppConfig.GetConfigValue("imagepath");
+                skinTextBox1.Text = ImagePath;
             }
 
-
-
+            //开机启动
             if (String.Equals(BootOpen, "0"))
             {
                  skinCheckBox1.Checked = false;
@@ -142,9 +121,8 @@ namespace BingWallpaper
                  skinCheckBox1.Checked = true;
             }
 
-
-
-            if (String.Equals(AutoUpdate, "0"))
+            //自动保存壁纸
+            if (String.Equals(UpdateSave, "0"))
             {
                  skinCheckBox2.Checked = false;
             }
@@ -153,9 +131,8 @@ namespace BingWallpaper
                  skinCheckBox2.Checked = true;
             }
 
-
-
-            if (String.Equals(UpdateSave, "0"))
+            //更新壁纸自动推出
+            if (String.Equals(UpdateExit, "0"))
             {
                  skinCheckBox3.Checked = false;
             }
@@ -164,16 +141,16 @@ namespace BingWallpaper
                  skinCheckBox3.Checked = true;
             }
 
-
-
-            if (String.Equals(UpdateExit, "0"))
+            //更新推送
+            if (String.Equals(UpdateVersion, "0"))
             {
-                 skinCheckBox4.Checked = false;
+                skinCheckBox4.Checked = false;
             }
             else
             {
-                 skinCheckBox4.Checked = true;
+                skinCheckBox4.Checked = true;
             }
+
         }
 
     }
