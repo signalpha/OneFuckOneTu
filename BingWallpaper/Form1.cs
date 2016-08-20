@@ -71,7 +71,6 @@ namespace BingWallpaper
         {
 
             string path = "";
-            string ImagePath = Properties.Settings.Default.ImagePath;
 
             //判断系统是win7还是win10
             Version currentVersion = Environment.OSVersion.Version;
@@ -79,45 +78,20 @@ namespace BingWallpaper
             if (currentVersion.CompareTo(compareToVersion) >= 0)
             {   
                 //win8及其以上版本的系统
-                //先判断自动保存有没有被勾选
-                if (Properties.Settings.Default.SaveImage)
-                {
-                    path = ImagePath + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
-                    SetWallpaper(path);
-                    MessageBox.Show(path + "不执行删除");
-                    //MessageBox.Show("壁纸自动保存，不用删除");
-                }
-                else
-                {
-                    path = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
-                    pictureBox1.Image.Save(path);
-                    SetWallpaper(path);
-                    MessageBox.Show(path+ "执行删除");
-                    System.IO.File.Delete(path);
-                    //MessageBox.Show("壁纸没有自动保存，存了删");
-                }
+                path = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
+                pictureBox1.Image.Save(path);
+                SetWallpaper(path);
+                System.IO.File.Delete(path);
+
             }
             else
             {
-                //先判断自动保存有没有被勾选
-                if (Properties.Settings.Default.SaveImage)
-                {
-                    path = ImagePath + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
-                    path = JpgToBmp(path);
-                    SetWallpaper(path);
-                    MessageBox.Show(path + "不执行删除");
-                    //MessageBox.Show("壁纸自动保存，不用删除");
-                }
-                else
-                {
-                    path = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
-                    pictureBox1.Image.Save(path);
-                    string bmppath = JpgToBmp(path);
-                    SetWallpaper(bmppath);
-                    System.IO.File.Delete(bmppath);
-                    System.IO.File.Delete(path);
-                    //MessageBox.Show("壁纸没有自动保存，存了删");
-                }
+                path = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
+                pictureBox1.Image.Save(path);
+                string bmppath = JpgToBmp(path);
+                SetWallpaper(bmppath);
+                System.IO.File.Delete(bmppath);
+                System.IO.File.Delete(path);
             }
 
         }
@@ -172,7 +146,6 @@ namespace BingWallpaper
 
             this.Height = (int)height;
             this.Width = (int)width;
-
         }
 
 
