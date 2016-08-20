@@ -26,6 +26,8 @@ namespace BingWallpaper
         {
             InitializeComponent();
 
+            //窗口缩放比例
+            PxProcessing(1.5);
 
             String imageurl = UrlProcessing();
             //将图片并显示到pictureBox上
@@ -47,7 +49,6 @@ namespace BingWallpaper
 
             //加载配置
             UserConfigProcessing();
-
 
 
         }
@@ -155,6 +156,23 @@ namespace BingWallpaper
         {
             Form2 frm = new Form2();
             frm.ShowDialog();
+        }
+
+
+        //适应不同分辨率
+        public void PxProcessing(double ratin)
+        {
+            ////获取屏幕分辨率
+            double sh = (double)Screen.PrimaryScreen.Bounds.Height;
+            double sw = (double)Screen.PrimaryScreen.Bounds.Width;
+
+            ////计算缩放比列
+            double height = sh / ratin;
+            double width = sw / ratin - 52;
+
+            this.Height = (int)height;
+            this.Width = (int)width;
+
         }
 
 
