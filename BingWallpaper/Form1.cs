@@ -25,7 +25,8 @@ namespace BingWallpaper
         public Form1()
         {
             InitializeComponent();
-            
+
+
             String imageurl = UrlProcessing();
             //将图片并显示到pictureBox上
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(imageurl);
@@ -33,9 +34,21 @@ namespace BingWallpaper
             pictureBox1.Image = Image.FromStream(s);
             s.Close();
 
+            //更新壁纸自动退出被勾选，不跟UserConfigProcessing()放一起是因为设置应用的时候要调用一次UserConfigProcessing()
+            if (Properties.Settings.Default.UpdateClose)
+            {
+                //if (IamgeExists() == 2)
+                //{
+                //    设置图片为背景ToolStripMenuItem_Click(null, null);
+                //    Close();
+                //    //Dispose();
+                //}
+            }
+
             //加载配置
             UserConfigProcessing();
-            
+
+
 
         }
 
@@ -55,26 +68,57 @@ namespace BingWallpaper
 
         private void 设置图片为背景ToolStripMenuItem_Click(object sender, EventArgs e)
         {
- 
+
             string path = "";
             string ImagePath = Properties.Settings.Default.ImagePath;
 
-            //先判断自动保存有没有被勾选
-            if (Properties.Settings.Default.SaveImage)
-            {
-                path = ImagePath + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
-                SetWallpaper(path);
-                //MessageBox.Show("壁纸自动保存，不用删除");
+            //判断系统是win7还是win10
+            Version currentVersion = Environment.OSVersion.Version;
+            Version compareToVersion = new Version("6.2");
+            if (currentVersion.CompareTo(compareToVersion) >= 0)
+            {   
+                //win8及其以上版本的系统
+                //先判断自动保存有没有被勾选
+                if (Properties.Settings.Default.SaveImage)
+                {
+                    path = ImagePath + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
+                    SetWallpaper(path);
+                    MessageBox.Show(path + "不执行删除");
+                    //MessageBox.Show("壁纸自动保存，不用删除");
+                }
+                else
+                {
+                    path = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
+                    pictureBox1.Image.Save(path);
+                    SetWallpaper(path);
+                    MessageBox.Show(path+ "执行删除");
+                    System.IO.File.Delete(path);
+                    //MessageBox.Show("壁纸没有自动保存，存了删");
+                }
             }
-            else 
+            else
             {
-                path = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
-                pictureBox1.Image.Save(path);
-                SetWallpaper(path);
-                System.IO.File.Delete(path);
-                //MessageBox.Show("壁纸没有自动保存，存了删");
+                //先判断自动保存有没有被勾选
+                if (Properties.Settings.Default.SaveImage)
+                {
+                    path = ImagePath + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
+                    path = JpgToBmp(path);
+                    SetWallpaper(path);
+                    MessageBox.Show(path + "不执行删除");
+                    //MessageBox.Show("壁纸自动保存，不用删除");
+                }
+                else
+                {
+                    path = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
+                    pictureBox1.Image.Save(path);
+                    string bmppath = JpgToBmp(path);
+                    SetWallpaper(bmppath);
+                    System.IO.File.Delete(bmppath);
+                    System.IO.File.Delete(path);
+                    //MessageBox.Show("壁纸没有自动保存，存了删");
+                }
             }
-           
+
         }
 
         private void 保存图片到目录ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -95,21 +139,6 @@ namespace BingWallpaper
             {
                 另存为ToolStripMenuItem_Click(null, null);
             }
-
-            //if (Properties.Settings.Default.SaveImage && Properties.Settings.Default.ImagePath.Length > 2)
-            //{
-            //    //如果有，判断图片是否保存过，保存过则提示已经存
-            //    IamgeExists();
-            //}
-            ////如果被勾选了，却没设路径，
-            //else if (Properties.Settings.Default.SaveImage && Properties.Settings.Default.ImagePath.Length < 2)
-            //{
-            //    MessageBox.Show("勾选了自动保存壁纸需要先设置路径");
-            //}
-            //else
-            //{
-            //    另存为ToolStripMenuItem_Click(null, null);
-            //}
 
         }
 
@@ -169,16 +198,6 @@ namespace BingWallpaper
                 IamgeExists();
             }
 
-            //更新壁纸自动退出被勾选
-            if (Properties.Settings.Default.UpdateClose)
-            {
-                //if (IamgeExists() == 2)
-                //{
-                //    设置图片为背景ToolStripMenuItem_Click(null, null);
-                //    Close();
-                //    //Dispose();
-                //}
-            }
 
             //开机启动被勾选
             if (Properties.Settings.Default.BootOpen)
@@ -250,6 +269,17 @@ namespace BingWallpaper
             }
         }
 
+
+        //jpg转bmp方法，用于win7系统
+        public string JpgToBmp(string path)
+        {
+            string bmppath = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".bmp";
+            MessageBox.Show("bompath=" + bmppath);
+            Bitmap bm = new System.Drawing.Bitmap(path);
+            bm.Save(bmppath, System.Drawing.Imaging.ImageFormat.Bmp);
+            bm.Dispose();   //释放资源
+            return bmppath;
+        }
 
         //调用Windows API，从DLL中导出函数（使用DllImport特性，需要引入System.Runtime.InteropServices命名空间）
         //即声明一个外部函  数。
