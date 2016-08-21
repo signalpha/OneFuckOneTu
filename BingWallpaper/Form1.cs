@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Reflection;
+using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
 
 
 namespace BingWallpaper
@@ -29,27 +23,62 @@ namespace BingWallpaper
             //窗口缩放比例
             PxProcessing(1.5);
 
-            String imageurl = UrlProcessing();
-            //将图片并显示到pictureBox上
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(imageurl);
-            Stream s = request.GetResponse().GetResponseStream();
-            pictureBox1.Image = Image.FromStream(s);
-            s.Close();
 
-            //更新壁纸自动退出被勾选，不跟UserConfigProcessing()放一起是因为设置应用的时候要调用一次UserConfigProcessing()
-            if (Properties.Settings.Default.UpdateClose)
+
+            if (OnBoot.TaskIsExists("任务名测试"))
             {
-                //if (IamgeExists() == 2)
-                //{
-                //    设置图片为背景ToolStripMenuItem_Click(null, null);
-                //    Close();
-                //    //Dispose();
-                //}
+                MessageBox.Show("已经有啦");
             }
+            else
+            {
+                MessageBox.Show("没有啦");
+            }
+            
 
-            //加载配置
-            UserConfigProcessing();
 
+            //检查是否有网络
+            if (ping())
+            {
+                string imageurl = UrlProcessing();
+
+                //分辨率设置
+                if (!Properties.Settings.Default.Resolution)
+                {
+                    imageurl = imageurl.Replace("1920x1080", "1366x768");
+                }
+
+                //将图片并显示到pictureBox上
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(imageurl);
+                Stream s = request.GetResponse().GetResponseStream();
+                pictureBox1.Image = Image.FromStream(s);
+                s.Dispose();
+
+                //判断有没有获取到图像
+                if (pictureBox1.Image != null)
+                {
+                    //更新壁纸自动退出被勾选，不跟UserConfigProcessing()放一起是因为设置应用的时候要调用一次UserConfigProcessing()
+                    if (Properties.Settings.Default.UpdateClose)
+                    {
+                        //if (IamgeExists() == 2)
+                        //{
+                        //    设置图片为背景ToolStripMenuItem_Click(null, null);
+                        //    Close();
+                        //    //Dispose();
+                        //}
+                    }
+
+                    //加载配置
+                    UserConfigProcessing();
+                }
+                else
+                {
+                    MessageBox.Show("获取图像失败，请联系作者");
+                }
+            }
+            else
+            {
+                MessageBox.Show("网络不通，获取图片失败");
+            }
 
         }
 
@@ -70,49 +99,63 @@ namespace BingWallpaper
         private void 设置图片为背景ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            string path = "";
+            if (pictureBox1.Image != null)
+            {
+                string path = "";
 
-            //判断系统是win7还是win10
-            Version currentVersion = Environment.OSVersion.Version;
-            Version compareToVersion = new Version("6.2");
-            if (currentVersion.CompareTo(compareToVersion) >= 0)
-            {   
-                //win8及其以上版本的系统
-                path = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
-                pictureBox1.Image.Save(path);
-                SetWallpaper(path);
-                System.IO.File.Delete(path);
+                //判断系统是win7还是win10
+                Version currentVersion = Environment.OSVersion.Version;
+                Version compareToVersion = new Version("6.2");
+                if (currentVersion.CompareTo(compareToVersion) >= 0)
+                {
+                    //win8及其以上版本的系统
+                    path = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
+                    pictureBox1.Image.Save(path);
+                    SetWallpaper(path);
+                    System.IO.File.Delete(path);
 
+                }
+                else
+                {
+                    path = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
+                    pictureBox1.Image.Save(path);
+                    string bmppath = JpgToBmp(path);
+                    SetWallpaper(bmppath);
+                    System.IO.File.Delete(bmppath);
+                    System.IO.File.Delete(path);
+                }
             }
             else
             {
-                path = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
-                pictureBox1.Image.Save(path);
-                string bmppath = JpgToBmp(path);
-                SetWallpaper(bmppath);
-                System.IO.File.Delete(bmppath);
-                System.IO.File.Delete(path);
+                MessageBox.Show("图片获取不到，设置失败。");
             }
+
+
+            
 
         }
 
         private void 保存图片到目录ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            //先判断自动保存壁纸有没有被勾选
-            if (Properties.Settings.Default.SaveImage)
+            if (pictureBox1.Image != null)
             {
-                //如果有，判断图片是否保存过，保存过则提示已经存
-                IamgeExists();
-            }
-            //如果没选，判断路径是否设置了
-            else if (Properties.Settings.Default.ImagePath.Length > 2)
-            {
-                IamgeExists();
+                string ImagePath = Properties.Settings.Default.ImagePath;
+                string Image = ImagePath + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
+
+                //先判断自动保存壁纸有没有被勾选，如果被勾选，路径一定存在
+                if (Properties.Settings.Default.SaveImage)
+                {
+                    pictureBox1.Image.Save(Image);
+                }
+                else
+                {
+                    另存为ToolStripMenuItem_Click(null, null);
+                }
             }
             else
             {
-                另存为ToolStripMenuItem_Click(null, null);
+                MessageBox.Show("图片获取不到，保存失败。");
             }
 
         }
@@ -122,7 +165,15 @@ namespace BingWallpaper
             string FilePath = File.DialogSaveFileFloder();
             if (FilePath != null)
             {
-                pictureBox1.Image.Save(FilePath);
+                if (pictureBox1.Image != null)
+                {
+                    pictureBox1.Image.Save(FilePath);
+                }
+                else
+                {
+                    MessageBox.Show("图片获取不到，保存失败。");
+                }
+                
             }
         }
 
@@ -186,78 +237,52 @@ namespace BingWallpaper
             //自动保存图片被勾选
             if (Properties.Settings.Default.SaveImage)
             {
-                IamgeExists();
+                保存图片到目录ToolStripMenuItem_Click(null,null);
             }
 
+            ////开机启动被勾选
+            //if (Properties.Settings.Default.BootOpen)
+            //{
+            //    string strAssName = Application.StartupPath + @"\" + Application.ProductName + @".exe";
+            //    string Appname = Application.ProductName;
+            //    OnBoot o = new OnBoot();
+            //    o.On(strAssName, Appname);
+            //}
 
-            //开机启动被勾选
-            if (Properties.Settings.Default.BootOpen)
-            {
-                string strAssName = Application.StartupPath + @"\" + Application.ProductName + @".exe";
-                string Appname = Application.ProductName;
-                OnBoot o = new OnBoot();
-                o.On(strAssName, Appname);
-            }
-
-            //关闭开机启动项
-            if (!Properties.Settings.Default.BootOpen)
-            {
-                string Appname = Application.ProductName;
-                OnBoot o = new OnBoot();
-                o.Off(Appname);
-            }
+            ////关闭开机启动项
+            //if (!Properties.Settings.Default.BootOpen)
+            //{
+            //    string Appname = Application.ProductName;
+            //    OnBoot o = new OnBoot();
+            //    o.Off(Appname);
+            //}
 
         }
 
 
-        /// <summary>
-        /// 用以判断图片是否存在
-        ///     返回值0：无自定义路径，无图片
-        ///     返回值1：有自定义路径，无图片，会自动保存图片
-        ///     返回值2：有自定义路径，有图片，用以判断是否当天第一次运行    
-        /// </summary>
-        /// <returns>
-        /// 
-        /// </returns>
-        public int IamgeExists()
+        //判断是否联网
+        public bool ping()
         {
-
-            string ImagePath = Properties.Settings.Default.ImagePath;
-            string Image = ImagePath + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
 
             try
             {
-                //判断是否有下载到图片
-                if (pictureBox1.Image == null)
-                {
-                    MessageBox.Show("图片获取失败，软件炸了");
-                    return 0;
-                }
+                Ping ping = new Ping();
+                PingReply pr = ping.Send("www.baidu.com");
 
-                //判断路径有没有定义
-                if (ImagePath.Length <= 2)
-                {
-                    return 0;
-                }
-
-                //判断图片是否已存在
-                if (System.IO.File.Exists(Image))
-                {
-                    //图片存在
-                    return 2;
-                }
+                if (pr.Status == IPStatus.Success)
+                    return true;
                 else
-                {
-                    //图片不存在
-                    pictureBox1.Image.Save(Image);
-                    return 1;
-                }
+                    return false;
             }
             catch (Exception)
             {
-                MessageBox.Show("自定义路径不存在");
-                return 0;
+
+                return false;
             }
+
+            
+
+
         }
 
 
@@ -265,12 +290,14 @@ namespace BingWallpaper
         public string JpgToBmp(string path)
         {
             string bmppath = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".bmp";
-            MessageBox.Show("bompath=" + bmppath);
             Bitmap bm = new System.Drawing.Bitmap(path);
             bm.Save(bmppath, System.Drawing.Imaging.ImageFormat.Bmp);
             bm.Dispose();   //释放资源
             return bmppath;
         }
+
+
+
 
         //调用Windows API，从DLL中导出函数（使用DllImport特性，需要引入System.Runtime.InteropServices命名空间）
         //即声明一个外部函  数。

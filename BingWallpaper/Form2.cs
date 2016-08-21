@@ -24,8 +24,8 @@ namespace BingWallpaper
             //加载用户配置
             UserConfig();
 
-            Tips(skinCheckBox1, "如果你希望每天换一张壁纸，请勾选它。");
-            Tips(skinCheckBox2, "需先设置保存目录，应用。每天保存一张壁纸，设置幻灯片放映也是个不错的选择");
+            Tips(skinCheckBox1, "Win7之后由于UAC的缘故，");
+            Tips(skinCheckBox2, "每天保存一张壁纸，设置幻灯片放映也是个不错的选择");
         }
 
 
@@ -68,18 +68,18 @@ namespace BingWallpaper
             else
                 Properties.Settings.Default.UpdateClose = false;
 
-
-            //自动更新
-            if (skinCheckBox4.Checked)
-                Properties.Settings.Default.Update = true;
+            //分辨率选项
+            if (skinRadioButton1.Checked)
+                Properties.Settings.Default.Resolution = true;
             else
-                Properties.Settings.Default.Update = false;
+                Properties.Settings.Default.Resolution = false;
+
 
             Properties.Settings.Default.Save();
 
             Form1 f = new Form1();
             f.UserConfigProcessing();
-            
+
         }
 
 
@@ -124,14 +124,21 @@ namespace BingWallpaper
             else
                 skinCheckBox3.Checked = false;
 
-            //更新推送
-            if (Properties.Settings.Default.Update)
-                skinCheckBox4.Checked = true;
+            //更新壁纸自动推出
+            if (Properties.Settings.Default.Resolution)
+                skinRadioButton1.Checked = true;
             else
-                skinCheckBox4.Checked = false;
+                skinRadioButton2.Checked = true;
 
         }
 
-
+        private void skinCheckBox2_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (skinTextBox1.Text.Length < 3)
+            {
+                MessageBox.Show("需先设置路径");
+                skinCheckBox2.Checked = false;
+            }
+        }
     }
 }

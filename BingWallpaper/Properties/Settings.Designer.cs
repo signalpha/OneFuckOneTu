@@ -61,13 +61,13 @@ namespace BingWallpaper.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool Update {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Resolution {
             get {
-                return ((bool)(this["Update"]));
+                return ((bool)(this["Resolution"]));
             }
             set {
-                this["Update"] = value;
+                this["Resolution"] = value;
             }
         }
         
