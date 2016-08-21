@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
 using static System.Environment;
+using System.Diagnostics;
+using System.Security.Principal;
 
 namespace BingWallpaper
 {
@@ -44,16 +46,47 @@ namespace BingWallpaper
         private void button3_Click(object sender, EventArgs e)
         {
 
+
             //保存目录
             Properties.Settings.Default.ImagePath = skinTextBox1.Text;
 
 
             //开机启动
             if (skinCheckBox1.Checked)
+            {
+                string taskname = "one_fuck_one_tu";
+                if (!OnBoot.TaskIsExists(taskname))
+                {
+                    if (UserAdmin.AdminIsExists())
+                    {
+                        string strAssName = Application.ExecutablePath;
+                        OnBoot.TaskCreate(taskname, strAssName);
+                    }
+                    else
+                    {
+                        //重启获取管理员权限
+                        UserAdmin.Upgrade();
+                    }
+                }
                 Properties.Settings.Default.BootOpen = true;
+            }
             else
+            {
+                string taskname = "one_fuck_one_tu";
+                if (OnBoot.TaskIsExists(taskname))
+                {
+                    if (UserAdmin.AdminIsExists())
+                    {
+                        OnBoot.DeleteTask(taskname);
+                    }
+                    else
+                    {
+                        //重启获取管理员权限
+                        UserAdmin.Upgrade();
+                    }
+                }
                 Properties.Settings.Default.BootOpen = false;
-
+            }
 
             //更新壁纸保存
             if (skinCheckBox2.Checked)
@@ -77,9 +110,6 @@ namespace BingWallpaper
 
             Properties.Settings.Default.Save();
 
-            Form1 f = new Form1();
-            f.UserConfigProcessing();
-
         }
 
 
@@ -94,7 +124,7 @@ namespace BingWallpaper
             ttpSettings.SetToolTip(Checkbox, TipsContent);
         }
 
-        //用户配置
+        //加载用户配置
         public void UserConfig()
         {
 

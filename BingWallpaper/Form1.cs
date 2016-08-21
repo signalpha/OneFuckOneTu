@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-
+using TaskScheduler;
 
 namespace BingWallpaper
 {
@@ -22,19 +22,6 @@ namespace BingWallpaper
 
             //窗口缩放比例
             PxProcessing(1.5);
-
-
-
-            if (OnBoot.TaskIsExists("任务名测试"))
-            {
-                MessageBox.Show("已经有啦");
-            }
-            else
-            {
-                MessageBox.Show("没有啦");
-            }
-            
-
 
             //检查是否有网络
             if (ping())
@@ -56,17 +43,7 @@ namespace BingWallpaper
                 //判断有没有获取到图像
                 if (pictureBox1.Image != null)
                 {
-                    //更新壁纸自动退出被勾选，不跟UserConfigProcessing()放一起是因为设置应用的时候要调用一次UserConfigProcessing()
-                    if (Properties.Settings.Default.UpdateClose)
-                    {
-                        //if (IamgeExists() == 2)
-                        //{
-                        //    设置图片为背景ToolStripMenuItem_Click(null, null);
-                        //    Close();
-                        //    //Dispose();
-                        //}
-                    }
-
+                    
                     //加载配置
                     UserConfigProcessing();
                 }
@@ -240,21 +217,18 @@ namespace BingWallpaper
                 保存图片到目录ToolStripMenuItem_Click(null,null);
             }
 
-            ////开机启动被勾选
-            //if (Properties.Settings.Default.BootOpen)
-            //{
-            //    string strAssName = Application.StartupPath + @"\" + Application.ProductName + @".exe";
-            //    string Appname = Application.ProductName;
-            //    OnBoot o = new OnBoot();
-            //    o.On(strAssName, Appname);
-            //}
+            //没必要在这里判断开机启动项，开机启动项只需要在 应用 被按下才选择是否去创建计划任务。
 
-            ////关闭开机启动项
-            //if (!Properties.Settings.Default.BootOpen)
+
+            //更新壁纸自动退出被勾选，不跟UserConfigProcessing()放一起是因为设置应用的时候要调用一次UserConfigProcessing()
+            //if (Properties.Settings.Default.UpdateClose)
             //{
-            //    string Appname = Application.ProductName;
-            //    OnBoot o = new OnBoot();
-            //    o.Off(Appname);
+            //    if (IamgeExists() == 2)
+            //    {
+            //        设置图片为背景ToolStripMenuItem_Click(null, null);
+            //        Close();
+            //        //Dispose();
+            //    }
             //}
 
         }
