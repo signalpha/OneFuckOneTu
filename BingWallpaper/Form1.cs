@@ -23,44 +23,57 @@ namespace BingWallpaper
             //窗口缩放比例
             PxProcessing(1.5);
 
-            //检查是否有网络
-            if (ping())
-            {
-                string imageurl = UrlProcessing();
+            
+            //到底该如何判断程序是自动启动还是手动启动
 
-                //分辨率设置
-                if (!Properties.Settings.Default.Resolution)
-                {
-                    imageurl = imageurl.Replace("1920x1080", "1366x768");
-                }
+            //string s = Environment.CommandLine;
+            //MessageBox.Show(s.ToString());
+            ////判断启动方式是开机自启还是手动开启
+            //if (Properties.Settings.Default.BootOpen)
+            //{
+            //    MessageBox.Show("我是真，执行开机启动");
+            //    if (ping()) { tong(); }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("我是假");
+            //    if (ping2()) { tong(); }
+            //}
 
-                //将图片并显示到pictureBox上
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(imageurl);
-                Stream s = request.GetResponse().GetResponseStream();
-                pictureBox1.Image = Image.FromStream(s);
-                s.Dispose();
+            
 
-                //判断有没有获取到图像
-                if (pictureBox1.Image != null)
-                {
-                    
-                    //加载配置
-                    UserConfigProcessing();
-                }
-                else
-                {
-                    MessageBox.Show("获取图像失败，请联系作者");
-                }
-            }
-            else
-            {
-                MessageBox.Show("网络不通，获取图片失败");
-            }
 
         }
 
 
-        
+        public void tong()
+        {
+            string imageurl = UrlProcessing();
+
+            //分辨率设置
+            if (!Properties.Settings.Default.Resolution)
+            {
+                imageurl = imageurl.Replace("1920x1080", "1366x768");
+            }
+
+            //将图片并显示到pictureBox上
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(imageurl);
+            Stream s = request.GetResponse().GetResponseStream();
+            pictureBox1.Image = Image.FromStream(s);
+            s.Dispose();
+
+            //判断有没有获取到图像
+            if (pictureBox1.Image != null)
+            {
+
+                //取配置处理
+                UserConfigProcessing();
+            }
+            else
+            {
+                MessageBox.Show("获取图像失败，请联系作者");
+            }
+        }
 
         
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
@@ -122,6 +135,10 @@ namespace BingWallpaper
 
                 //先判断自动保存壁纸有没有被勾选，如果被勾选，路径一定存在
                 if (Properties.Settings.Default.SaveImage)
+                {
+                    pictureBox1.Image.Save(Image);
+                }
+                else if (ImagePath.Length > 2)
                 {
                     pictureBox1.Image.Save(Image);
                 }
@@ -234,29 +251,49 @@ namespace BingWallpaper
         }
 
 
-        //判断是否联网
+        //判断是否联网(开机自启)
         public bool ping()
         {
-
             try
             {
                 Ping ping = new Ping();
-                PingReply pr = ping.Send("www.baidu.com");
+                PingReply pr;
+                int i = 0;
+                do
+                {
+                    pr = ping.Send("www.baidu.com");
 
-                if (pr.Status == IPStatus.Success)
-                    return true;
-                else
-                    return false;
+                    i = i++;
+                    MessageBox.Show(i.ToString());
+                } while (pr.Status == IPStatus.Success);
+                return true;
             }
             catch (Exception)
             {
 
                 return false;
             }
+        }
 
-            
+        //判断是否联网(手动开启)
+        public bool ping2()
+        {
+            try
+            {
+                Ping ping = new Ping();
+                PingReply pr = ping.Send("www.baidu.com");
 
+                if (pr.Status == IPStatus.Success)
+                {
+                    return true;
+                }
 
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
 
@@ -273,7 +310,7 @@ namespace BingWallpaper
 
 
 
-        //调用Windows API，从DLL中导出函数（使用DllImport特性，需要引入System.Runtime.InteropServices命名空间）
+        //设置背景调用Windows API，从DLL中导出函数（使用DllImport特性，需要引入System.Runtime.InteropServices命名空间）
         //即声明一个外部函  数。
         [DllImport("user32.dll")]
         private static extern bool SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
