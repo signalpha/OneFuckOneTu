@@ -23,56 +23,52 @@ namespace BingWallpaper
             //窗口缩放比例
             PxProcessing(1.5);
 
-            
+
+            string imageurl = UrlProcessing();
+
+            if (imageurl != null)
+            {
+                //分辨率设置
+                if (!Properties.Settings.Default.Resolution)
+                {
+                    imageurl = imageurl.Replace("1920x1080", "1366x768");
+                }
+
+                try
+                {
+                    //将图片并显示到pictureBox上
+                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(imageurl);
+                    Stream s = request.GetResponse().GetResponseStream();
+                    pictureBox1.Image = Image.FromStream(s);
+                    s.Dispose();
+
+                    //取配置处理
+                    UserConfigProcessing();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("图片下载成功，但加载失败，请联系作者");
+                }
+
+            }
+
+            //判断是否修改标题栏
+            if (UserAdmin.AdminIsExists())
+                this.Text = "Bing每日美图  ( 管理员模式 )";
+            else
+                this.Text = "Bing每日美图";
+
+
+
             //到底该如何判断程序是自动启动还是手动启动
 
-            //string s = Environment.CommandLine;
-            //MessageBox.Show(s.ToString());
-            ////判断启动方式是开机自启还是手动开启
-            //if (Properties.Settings.Default.BootOpen)
-            //{
-            //    MessageBox.Show("我是真，执行开机启动");
-            //    if (ping()) { tong(); }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("我是假");
-            //    if (ping2()) { tong(); }
-            //}
-
             
-
-
         }
 
 
         public void tong()
         {
-            string imageurl = UrlProcessing();
-
-            //分辨率设置
-            if (!Properties.Settings.Default.Resolution)
-            {
-                imageurl = imageurl.Replace("1920x1080", "1366x768");
-            }
-
-            //将图片并显示到pictureBox上
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(imageurl);
-            Stream s = request.GetResponse().GetResponseStream();
-            pictureBox1.Image = Image.FromStream(s);
-            s.Dispose();
-
-            //判断有没有获取到图像
-            if (pictureBox1.Image != null)
-            {
-
-                //取配置处理
-                UserConfigProcessing();
-            }
-            else
-            {
-                MessageBox.Show("获取图像失败，请联系作者");
-            }
+            
         }
 
         
@@ -198,15 +194,29 @@ namespace BingWallpaper
         public String UrlProcessing()
         {
             String url = "http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1";
+            byte[] WebContent = null;
 
-            WebClient MyWebClient = new WebClient();
+            try
+            {
 
-            //从网页抓取数据
-            byte[] WebContent = MyWebClient.DownloadData(url);
+                WebClient MyWebClient = new WebClient();
+
+                //从网页抓取数据
+                WebContent = MyWebClient.DownloadData(url);
+
+            }
+            catch (Exception)
+            {
+                //判断是否联网
+                if (ping())
+                    MessageBox.Show("有网络但图片获取失败，请联系作者");
+                else
+                    MessageBox.Show("无网络链接，图片获取失败");
+                return null;
+            }
 
             //转String
             String pageHtml = Encoding.Default.GetString(WebContent);
-
 
             //正则解析出图片地址
             Regex reg = new Regex(@"(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?.jpg");
@@ -221,6 +231,7 @@ namespace BingWallpaper
             }
 
             return ImageUrl;
+
         }
 
 
@@ -251,32 +262,9 @@ namespace BingWallpaper
         }
 
 
-        //判断是否联网(开机自启)
+
+        //判断是否联网
         public bool ping()
-        {
-            try
-            {
-                Ping ping = new Ping();
-                PingReply pr;
-                int i = 0;
-                do
-                {
-                    pr = ping.Send("www.baidu.com");
-
-                    i = i++;
-                    MessageBox.Show(i.ToString());
-                } while (pr.Status == IPStatus.Success);
-                return true;
-            }
-            catch (Exception)
-            {
-
-                return false;
-            }
-        }
-
-        //判断是否联网(手动开启)
-        public bool ping2()
         {
             try
             {
