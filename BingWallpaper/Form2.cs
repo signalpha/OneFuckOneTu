@@ -26,7 +26,7 @@ namespace BingWallpaper
             //加载用户配置
             UserConfig();
 
-            Tips(skinCheckBox1, "Win7之后由于UAC的缘故，");
+            Tips(skinCheckBox1, "不建议手动拨号上网的用户开启");
             Tips(skinCheckBox2, "每天保存一张壁纸，设置幻灯片放映也是个不错的选择");
         }
 

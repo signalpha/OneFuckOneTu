@@ -22,7 +22,8 @@ namespace BingWallpaper
 
             //窗口缩放比例
             PxProcessing(1.5);
-
+            //ToolTip toolTip1 = new ToolTip();
+            //toolTip1.SetToolTip(skinLabel1, "My button1");
 
             string imageurl = UrlProcessing();
 
@@ -52,6 +53,7 @@ namespace BingWallpaper
 
             }
 
+
             //判断是否修改标题栏
             if (UserAdmin.AdminIsExists())
                 this.Text = "Bing每日美图  ( 管理员模式 )";
@@ -59,19 +61,8 @@ namespace BingWallpaper
                 this.Text = "Bing每日美图";
 
 
-
-            //到底该如何判断程序是自动启动还是手动启动
-
-            
         }
 
-
-        public void tong()
-        {
-            
-        }
-
-        
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
             //右键弹出菜单项
@@ -262,7 +253,6 @@ namespace BingWallpaper
         }
 
 
-
         //判断是否联网
         public bool ping()
         {
@@ -295,13 +285,11 @@ namespace BingWallpaper
             return bmppath;
         }
 
-
-
-
         //设置背景调用Windows API，从DLL中导出函数（使用DllImport特性，需要引入System.Runtime.InteropServices命名空间）
         //即声明一个外部函  数。
         [DllImport("user32.dll")]
         private static extern bool SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
+
         public static void SetWallpaper(string path)
         {
             SystemParametersInfo(20, 0, path, 0x01 | 0x02);

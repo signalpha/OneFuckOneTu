@@ -194,9 +194,9 @@
             this.skinLabel2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.skinLabel2.Location = new System.Drawing.Point(16, 86);
             this.skinLabel2.Name = "skinLabel2";
-            this.skinLabel2.Size = new System.Drawing.Size(71, 17);
+            this.skinLabel2.Size = new System.Drawing.Size(80, 17);
             this.skinLabel2.TabIndex = 9;
-            this.skinLabel2.Text = "分辨率选择:";
+            this.skinLabel2.Text = "分辨率选择：";
             // 
             // skinRadioButton1
             // 
@@ -205,7 +205,7 @@
             this.skinRadioButton1.ControlState = CCWin.SkinClass.ControlState.Normal;
             this.skinRadioButton1.DownBack = null;
             this.skinRadioButton1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinRadioButton1.Location = new System.Drawing.Point(93, 84);
+            this.skinRadioButton1.Location = new System.Drawing.Point(95, 84);
             this.skinRadioButton1.MouseBack = null;
             this.skinRadioButton1.Name = "skinRadioButton1";
             this.skinRadioButton1.NormlBack = null;
@@ -225,7 +225,7 @@
             this.skinRadioButton2.ControlState = CCWin.SkinClass.ControlState.Normal;
             this.skinRadioButton2.DownBack = null;
             this.skinRadioButton2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinRadioButton2.Location = new System.Drawing.Point(201, 84);
+            this.skinRadioButton2.Location = new System.Drawing.Point(196, 84);
             this.skinRadioButton2.MouseBack = null;
             this.skinRadioButton2.Name = "skinRadioButton2";
             this.skinRadioButton2.NormlBack = null;
