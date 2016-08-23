@@ -17,6 +17,7 @@ namespace BingWallpaper
             WindowsIdentity identity = WindowsIdentity.GetCurrent();
             WindowsPrincipal principal = new WindowsPrincipal(identity);
             Boolean isRunasAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
+            identity.Dispose(); //释放资源
 
             if (isRunasAdmin)
                 return true;

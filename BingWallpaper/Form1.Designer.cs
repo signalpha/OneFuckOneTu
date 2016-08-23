@@ -36,11 +36,9 @@
             this.另存为ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.skinPanel1 = new CCWin.SkinControl.SkinPanel();
-            this.skinLabel1 = new CCWin.SkinControl.SkinLabel();
+            this.dSkinHtmlLabel1 = new DSkin.Controls.DSkinHtmlLabel();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.skinPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -52,7 +50,7 @@
             this.另存为ToolStripMenuItem,
             this.设置ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 136);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 114);
             // 
             // 设置图片为背景ToolStripMenuItem
             // 
@@ -95,54 +93,45 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(880, 540);
+            this.pictureBox1.Size = new System.Drawing.Size(849, 537);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.WaitOnLoad = true;
             this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             // 
-            // skinPanel1
+            // dSkinHtmlLabel1
             // 
-            this.skinPanel1.BackColor = System.Drawing.Color.Transparent;
-            this.skinPanel1.BorderColor = System.Drawing.Color.Silver;
-            this.skinPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.skinPanel1.Controls.Add(this.skinLabel1);
-            this.skinPanel1.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.skinPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.skinPanel1.DownBack = null;
-            this.skinPanel1.Location = new System.Drawing.Point(0, 511);
-            this.skinPanel1.MouseBack = null;
-            this.skinPanel1.Name = "skinPanel1";
-            this.skinPanel1.NormlBack = null;
-            this.skinPanel1.Size = new System.Drawing.Size(880, 29);
-            this.skinPanel1.TabIndex = 2;
-            // 
-            // skinLabel1
-            // 
-            this.skinLabel1.ArtTextStyle = CCWin.SkinControl.ArtTextStyle.Anamorphosis;
-            this.skinLabel1.AutoEllipsis = true;
-            this.skinLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.skinLabel1.BorderColor = System.Drawing.Color.White;
-            this.skinLabel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.skinLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.skinLabel1.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.skinLabel1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.skinLabel1.Location = new System.Drawing.Point(0, -1);
-            this.skinLabel1.Margin = new System.Windows.Forms.Padding(0);
-            this.skinLabel1.Name = "skinLabel1";
-            this.skinLabel1.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.skinLabel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.skinLabel1.Size = new System.Drawing.Size(878, 28);
-            this.skinLabel1.TabIndex = 3;
-            this.skinLabel1.Text = ".............................";
-            this.skinLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.dSkinHtmlLabel1.AutoSize = false;
+            this.dSkinHtmlLabel1.AutoSizeHeightOnly = true;
+            this.dSkinHtmlLabel1.BaseStylesheet = "";
+            this.dSkinHtmlLabel1.Borders.AllWidth = 0;
+            this.dSkinHtmlLabel1.Borders.BottomColor = System.Drawing.Color.Transparent;
+            this.dSkinHtmlLabel1.Borders.BottomWidth = 0;
+            this.dSkinHtmlLabel1.Borders.LeftColor = System.Drawing.Color.Transparent;
+            this.dSkinHtmlLabel1.Borders.LeftWidth = 0;
+            this.dSkinHtmlLabel1.Borders.RightColor = System.Drawing.Color.Transparent;
+            this.dSkinHtmlLabel1.Borders.RightWidth = 0;
+            this.dSkinHtmlLabel1.Borders.TopColor = System.Drawing.Color.Transparent;
+            this.dSkinHtmlLabel1.Borders.TopWidth = 0;
+            this.dSkinHtmlLabel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dSkinHtmlLabel1.DuiBackgroundRender.BorderWidth = 2;
+            this.dSkinHtmlLabel1.DuiBackgroundRender.RenderBorders = true;
+            this.dSkinHtmlLabel1.Location = new System.Drawing.Point(0, 517);
+            this.dSkinHtmlLabel1.Margin = new System.Windows.Forms.Padding(0);
+            this.dSkinHtmlLabel1.Name = "dSkinHtmlLabel1";
+            this.dSkinHtmlLabel1.Size = new System.Drawing.Size(849, 20);
+            this.dSkinHtmlLabel1.SudokuPartitionWidth = new System.Windows.Forms.Padding(0);
+            this.dSkinHtmlLabel1.TabIndex = 1;
+            this.dSkinHtmlLabel1.Text = "美图故事...";
+            this.dSkinHtmlLabel1.TextRenderMode = System.Drawing.Text.TextRenderingHint.AntiAlias;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(880, 540);
-            this.Controls.Add(this.skinPanel1);
+            this.ClientSize = new System.Drawing.Size(849, 537);
+            this.Controls.Add(this.dSkinHtmlLabel1);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -151,7 +140,6 @@
             this.Text = "Bing每日美图";
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.skinPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -164,9 +152,8 @@
         private System.Windows.Forms.ToolStripMenuItem 保存图片到目录ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 另存为ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 设置ToolStripMenuItem;
-        private CCWin.SkinControl.SkinPanel skinPanel1;
-        private CCWin.SkinControl.SkinLabel skinLabel1;
         private System.Windows.Forms.ToolStripMenuItem 显示美图故事ToolStripMenuItem;
+        private DSkin.Controls.DSkinHtmlLabel dSkinHtmlLabel1;
     }
 }
 

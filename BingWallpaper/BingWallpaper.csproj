@@ -37,8 +37,11 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CSkin">
-      <HintPath>C:\Users\signa\Desktop\CSkin 16.1.14.2\CSkin 4.0\CSkin.dll</HintPath>
+    <Reference Include="DSkin">
+      <HintPath>..\..\..\..\winform第三方库\新建文件夹 (4)\【4.0】DSkin20160823224723\DSkin.dll</HintPath>
+    </Reference>
+    <Reference Include="DSkin.Design">
+      <HintPath>..\..\..\..\winform第三方库\新建文件夹 (4)\【4.0】DSkin20160823224723\DSkin.Design.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />

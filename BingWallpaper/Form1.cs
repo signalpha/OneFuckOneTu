@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using TaskScheduler;
+
 
 namespace BingWallpaper
 {
@@ -56,12 +56,12 @@ namespace BingWallpaper
                 url = "http://cn.bing.com/cnhp/coverstory/";
                 zheng = "\"para1\":\"(?<para1>.*?)\",\"para2\":\"";
                 content = UrlProcessing(url, zheng, 1);
-                skinLabel1.Text = content;
-                ToolTip toolTip1 = new ToolTip();
-                toolTip1.AutoPopDelay = 15 * 1000;
-                toolTip1.SetToolTip(skinLabel1, content);
+                
+                dSkinHtmlLabel1.Text = content;
 
-                //skinPanel1.BackColor = Color.FromArgb(100, 88, 44, 55);
+                //dSkinHtmlLabel1.Height = dSkinHtmlLabel1.Height;
+
+                //dSkinHtmlLabel1.BackColor = Color.FromArgb(100, 88, 44, 55);
             }
 
 
@@ -70,8 +70,6 @@ namespace BingWallpaper
                 this.Text = "Bing每日美图  ( 管理员模式 )";
             else
                 this.Text = "Bing每日美图";
-
-
         }
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
@@ -154,15 +152,15 @@ namespace BingWallpaper
 
         private void 显示美图故事ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (skinPanel1.Visible)
+            if (dSkinHtmlLabel1.Visible)
             {
-                skinPanel1.Visible = false;
+                dSkinHtmlLabel1.Visible = false;
                 contextMenuStrip1.Items[2].Text = "显示美图故事";
                 Properties.Settings.Default.Story = false;
             }
             else
             {
-                skinPanel1.Visible = true;
+                dSkinHtmlLabel1.Visible = true;
                 contextMenuStrip1.Items[2].Text = "隐藏美图故事";
                 Properties.Settings.Default.Story = true;
             }
@@ -264,12 +262,12 @@ namespace BingWallpaper
             //美图故事
             if (Properties.Settings.Default.Story)
             {
-                skinPanel1.Visible = true;
+                dSkinHtmlLabel1.Visible = true;
                 contextMenuStrip1.Items[2].Text = "隐藏美图故事";
             }
             else
             {
-                skinPanel1.Visible = false;
+                dSkinHtmlLabel1.Visible = false;
                 contextMenuStrip1.Items[2].Text = "显示美图故事";
             }
 
@@ -332,6 +330,8 @@ namespace BingWallpaper
             SystemParametersInfo(20, 0, path, 0x01 | 0x02);
         }
 
-        
+
+
+
     }
 }

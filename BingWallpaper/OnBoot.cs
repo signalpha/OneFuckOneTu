@@ -95,7 +95,6 @@ namespace BingWallpaper
                 null,   //password
                 _TASK_LOGON_TYPE.TASK_LOGON_INTERACTIVE_TOKEN,// Principal.LogonType
                 "");
-
         }
 
 

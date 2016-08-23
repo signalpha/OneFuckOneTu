@@ -28,99 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.skinLabel1 = new CCWin.SkinControl.SkinLabel();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.button1 = new System.Windows.Forms.Button();
-            this.skinCheckBox1 = new CCWin.SkinControl.SkinCheckBox();
-            this.skinCheckBox2 = new CCWin.SkinControl.SkinCheckBox();
-            this.skinCheckBox3 = new CCWin.SkinControl.SkinCheckBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.skinTextBox1 = new CCWin.SkinControl.SkinTextBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.skinLabel2 = new CCWin.SkinControl.SkinLabel();
-            this.skinRadioButton1 = new CCWin.SkinControl.SkinRadioButton();
-            this.skinRadioButton2 = new CCWin.SkinControl.SkinRadioButton();
+            this.dSkinRadioButton1 = new DSkin.Controls.DSkinRadioButton();
+            this.dSkinRadioButton2 = new DSkin.Controls.DSkinRadioButton();
+            this.dSkinCheckBox1 = new DSkin.Controls.DSkinCheckBox();
+            this.dSkinCheckBox2 = new DSkin.Controls.DSkinCheckBox();
+            this.dSkinCheckBox3 = new DSkin.Controls.DSkinCheckBox();
+            this.TextBox1 = new DSkin.Controls.DSkinTextBox();
+            this.dSkinLabel1 = new DSkin.Controls.DSkinLabel();
+            this.dSkinLabel2 = new DSkin.Controls.DSkinLabel();
             this.SuspendLayout();
-            // 
-            // skinLabel1
-            // 
-            this.skinLabel1.AutoSize = true;
-            this.skinLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.skinLabel1.BorderColor = System.Drawing.Color.White;
-            this.skinLabel1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinLabel1.Location = new System.Drawing.Point(12, 24);
-            this.skinLabel1.Name = "skinLabel1";
-            this.skinLabel1.Size = new System.Drawing.Size(84, 17);
-            this.skinLabel1.TabIndex = 0;
-            this.skinLabel1.Text = " 图片保存目录";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(334, 48);
+            this.button1.Location = new System.Drawing.Point(334, 41);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 28);
             this.button1.TabIndex = 2;
             this.button1.Text = "浏览";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // skinCheckBox1
-            // 
-            this.skinCheckBox1.AutoSize = true;
-            this.skinCheckBox1.BackColor = System.Drawing.Color.Transparent;
-            this.skinCheckBox1.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.skinCheckBox1.DownBack = null;
-            this.skinCheckBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinCheckBox1.Location = new System.Drawing.Point(15, 118);
-            this.skinCheckBox1.MouseBack = null;
-            this.skinCheckBox1.Name = "skinCheckBox1";
-            this.skinCheckBox1.NormlBack = null;
-            this.skinCheckBox1.SelectedDownBack = null;
-            this.skinCheckBox1.SelectedMouseBack = null;
-            this.skinCheckBox1.SelectedNormlBack = null;
-            this.skinCheckBox1.Size = new System.Drawing.Size(87, 21);
-            this.skinCheckBox1.TabIndex = 4;
-            this.skinCheckBox1.Text = "开机自启动";
-            this.skinCheckBox1.UseVisualStyleBackColor = false;
-            // 
-            // skinCheckBox2
-            // 
-            this.skinCheckBox2.AutoSize = true;
-            this.skinCheckBox2.BackColor = System.Drawing.Color.Transparent;
-            this.skinCheckBox2.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.skinCheckBox2.DownBack = null;
-            this.skinCheckBox2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinCheckBox2.Location = new System.Drawing.Point(15, 149);
-            this.skinCheckBox2.MouseBack = null;
-            this.skinCheckBox2.Name = "skinCheckBox2";
-            this.skinCheckBox2.NormlBack = null;
-            this.skinCheckBox2.SelectedDownBack = null;
-            this.skinCheckBox2.SelectedMouseBack = null;
-            this.skinCheckBox2.SelectedNormlBack = null;
-            this.skinCheckBox2.Size = new System.Drawing.Size(135, 21);
-            this.skinCheckBox2.TabIndex = 5;
-            this.skinCheckBox2.Text = "自动保存浏览的图片";
-            this.skinCheckBox2.UseVisualStyleBackColor = false;
-            this.skinCheckBox2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.skinCheckBox2_MouseClick);
-            // 
-            // skinCheckBox3
-            // 
-            this.skinCheckBox3.AutoSize = true;
-            this.skinCheckBox3.BackColor = System.Drawing.Color.Transparent;
-            this.skinCheckBox3.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.skinCheckBox3.DownBack = null;
-            this.skinCheckBox3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinCheckBox3.Location = new System.Drawing.Point(15, 182);
-            this.skinCheckBox3.MouseBack = null;
-            this.skinCheckBox3.Name = "skinCheckBox3";
-            this.skinCheckBox3.NormlBack = null;
-            this.skinCheckBox3.SelectedDownBack = null;
-            this.skinCheckBox3.SelectedMouseBack = null;
-            this.skinCheckBox3.SelectedNormlBack = null;
-            this.skinCheckBox3.Size = new System.Drawing.Size(135, 21);
-            this.skinCheckBox3.TabIndex = 6;
-            this.skinCheckBox3.Text = "更新壁纸后自动退出";
-            this.skinCheckBox3.UseVisualStyleBackColor = false;
             // 
             // button2
             // 
@@ -131,54 +61,9 @@
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // skinTextBox1
-            // 
-            this.skinTextBox1.BackColor = System.Drawing.Color.Transparent;
-            this.skinTextBox1.DownBack = null;
-            this.skinTextBox1.Icon = null;
-            this.skinTextBox1.IconIsButton = false;
-            this.skinTextBox1.IconMouseState = CCWin.SkinClass.ControlState.Normal;
-            this.skinTextBox1.IsPasswordChat = '\0';
-            this.skinTextBox1.IsSystemPasswordChar = false;
-            this.skinTextBox1.Lines = new string[] {
-        "skinTextBox1"};
-            this.skinTextBox1.Location = new System.Drawing.Point(15, 48);
-            this.skinTextBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.skinTextBox1.MaxLength = 32767;
-            this.skinTextBox1.MinimumSize = new System.Drawing.Size(28, 28);
-            this.skinTextBox1.MouseBack = null;
-            this.skinTextBox1.MouseState = CCWin.SkinClass.ControlState.Normal;
-            this.skinTextBox1.Multiline = false;
-            this.skinTextBox1.Name = "skinTextBox1";
-            this.skinTextBox1.NormlBack = null;
-            this.skinTextBox1.Padding = new System.Windows.Forms.Padding(5);
-            this.skinTextBox1.ReadOnly = true;
-            this.skinTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.skinTextBox1.Size = new System.Drawing.Size(320, 28);
-            // 
-            // 
-            // 
-            this.skinTextBox1.SkinTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.skinTextBox1.SkinTxt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.skinTextBox1.SkinTxt.Font = new System.Drawing.Font("微软雅黑", 9.75F);
-            this.skinTextBox1.SkinTxt.Location = new System.Drawing.Point(5, 5);
-            this.skinTextBox1.SkinTxt.Name = "BaseText";
-            this.skinTextBox1.SkinTxt.ReadOnly = true;
-            this.skinTextBox1.SkinTxt.Size = new System.Drawing.Size(310, 18);
-            this.skinTextBox1.SkinTxt.TabIndex = 0;
-            this.skinTextBox1.SkinTxt.Text = "skinTextBox1";
-            this.skinTextBox1.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
-            this.skinTextBox1.SkinTxt.WaterText = "";
-            this.skinTextBox1.TabIndex = 7;
-            this.skinTextBox1.Text = "skinTextBox1";
-            this.skinTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.skinTextBox1.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
-            this.skinTextBox1.WaterText = "";
-            this.skinTextBox1.WordWrap = true;
-            // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(334, 174);
+            this.button3.Location = new System.Drawing.Point(334, 161);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 28);
             this.button3.TabIndex = 8;
@@ -186,74 +71,187 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // skinLabel2
+            // dSkinRadioButton1
             // 
-            this.skinLabel2.AutoSize = true;
-            this.skinLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.skinLabel2.BorderColor = System.Drawing.Color.White;
-            this.skinLabel2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinLabel2.Location = new System.Drawing.Point(16, 86);
-            this.skinLabel2.Name = "skinLabel2";
-            this.skinLabel2.Size = new System.Drawing.Size(80, 17);
-            this.skinLabel2.TabIndex = 9;
-            this.skinLabel2.Text = "分辨率选择：";
+            this.dSkinRadioButton1.CheckAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.dSkinRadioButton1.Checked = false;
+            this.dSkinRadioButton1.CheckFlagColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(151)))), ((int)(((byte)(2)))));
+            this.dSkinRadioButton1.CheckFlagColorDisabled = System.Drawing.Color.Gray;
+            this.dSkinRadioButton1.CheckRectBackColorDisabled = System.Drawing.Color.Silver;
+            this.dSkinRadioButton1.CheckRectBackColorHighLight = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(239)))), ((int)(((byte)(219)))));
+            this.dSkinRadioButton1.CheckRectBackColorNormal = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(239)))), ((int)(((byte)(219)))));
+            this.dSkinRadioButton1.CheckRectBackColorPressed = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(226)))), ((int)(((byte)(188)))));
+            this.dSkinRadioButton1.CheckRectColor = System.Drawing.Color.DodgerBlue;
+            this.dSkinRadioButton1.CheckRectColorDisabled = System.Drawing.Color.Gray;
+            this.dSkinRadioButton1.CheckRectWidth = 14;
+            this.dSkinRadioButton1.CheckState = System.Windows.Forms.CheckState.Unchecked;
+            this.dSkinRadioButton1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dSkinRadioButton1.InnerPaddingWidth = 2;
+            this.dSkinRadioButton1.InnerRectInflate = 4;
+            this.dSkinRadioButton1.Location = new System.Drawing.Point(97, 77);
+            this.dSkinRadioButton1.Name = "dSkinRadioButton1";
+            this.dSkinRadioButton1.Size = new System.Drawing.Size(93, 21);
+            this.dSkinRadioButton1.SpaceBetweenCheckMarkAndText = 3;
+            this.dSkinRadioButton1.TabIndex = 12;
+            this.dSkinRadioButton1.Text = "1920×1080";
+            this.dSkinRadioButton1.TextColorDisabled = System.Drawing.Color.Gray;
+            this.dSkinRadioButton1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
             // 
-            // skinRadioButton1
+            // dSkinRadioButton2
             // 
-            this.skinRadioButton1.AutoSize = true;
-            this.skinRadioButton1.BackColor = System.Drawing.Color.Transparent;
-            this.skinRadioButton1.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.skinRadioButton1.DownBack = null;
-            this.skinRadioButton1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinRadioButton1.Location = new System.Drawing.Point(95, 84);
-            this.skinRadioButton1.MouseBack = null;
-            this.skinRadioButton1.Name = "skinRadioButton1";
-            this.skinRadioButton1.NormlBack = null;
-            this.skinRadioButton1.SelectedDownBack = null;
-            this.skinRadioButton1.SelectedMouseBack = null;
-            this.skinRadioButton1.SelectedNormlBack = null;
-            this.skinRadioButton1.Size = new System.Drawing.Size(91, 21);
-            this.skinRadioButton1.TabIndex = 10;
-            this.skinRadioButton1.TabStop = true;
-            this.skinRadioButton1.Text = "1920×1080";
-            this.skinRadioButton1.UseVisualStyleBackColor = false;
+            this.dSkinRadioButton2.CheckAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.dSkinRadioButton2.Checked = false;
+            this.dSkinRadioButton2.CheckFlagColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(151)))), ((int)(((byte)(2)))));
+            this.dSkinRadioButton2.CheckFlagColorDisabled = System.Drawing.Color.Gray;
+            this.dSkinRadioButton2.CheckRectBackColorDisabled = System.Drawing.Color.Silver;
+            this.dSkinRadioButton2.CheckRectBackColorHighLight = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(239)))), ((int)(((byte)(219)))));
+            this.dSkinRadioButton2.CheckRectBackColorNormal = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(239)))), ((int)(((byte)(219)))));
+            this.dSkinRadioButton2.CheckRectBackColorPressed = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(226)))), ((int)(((byte)(188)))));
+            this.dSkinRadioButton2.CheckRectColor = System.Drawing.Color.DodgerBlue;
+            this.dSkinRadioButton2.CheckRectColorDisabled = System.Drawing.Color.Gray;
+            this.dSkinRadioButton2.CheckRectWidth = 14;
+            this.dSkinRadioButton2.CheckState = System.Windows.Forms.CheckState.Unchecked;
+            this.dSkinRadioButton2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dSkinRadioButton2.InnerPaddingWidth = 2;
+            this.dSkinRadioButton2.InnerRectInflate = 4;
+            this.dSkinRadioButton2.Location = new System.Drawing.Point(199, 77);
+            this.dSkinRadioButton2.Name = "dSkinRadioButton2";
+            this.dSkinRadioButton2.Size = new System.Drawing.Size(85, 21);
+            this.dSkinRadioButton2.SpaceBetweenCheckMarkAndText = 3;
+            this.dSkinRadioButton2.TabIndex = 13;
+            this.dSkinRadioButton2.Text = "1366×768";
+            this.dSkinRadioButton2.TextColorDisabled = System.Drawing.Color.Gray;
+            this.dSkinRadioButton2.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
             // 
-            // skinRadioButton2
+            // dSkinCheckBox1
             // 
-            this.skinRadioButton2.AutoSize = true;
-            this.skinRadioButton2.BackColor = System.Drawing.Color.Transparent;
-            this.skinRadioButton2.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.skinRadioButton2.DownBack = null;
-            this.skinRadioButton2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinRadioButton2.Location = new System.Drawing.Point(196, 84);
-            this.skinRadioButton2.MouseBack = null;
-            this.skinRadioButton2.Name = "skinRadioButton2";
-            this.skinRadioButton2.NormlBack = null;
-            this.skinRadioButton2.SelectedDownBack = null;
-            this.skinRadioButton2.SelectedMouseBack = null;
-            this.skinRadioButton2.SelectedNormlBack = null;
-            this.skinRadioButton2.Size = new System.Drawing.Size(84, 21);
-            this.skinRadioButton2.TabIndex = 11;
-            this.skinRadioButton2.TabStop = true;
-            this.skinRadioButton2.Text = "1366×768";
-            this.skinRadioButton2.UseVisualStyleBackColor = false;
+            this.dSkinCheckBox1.CheckAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.dSkinCheckBox1.Checked = false;
+            this.dSkinCheckBox1.CheckFlagColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(151)))), ((int)(((byte)(2)))));
+            this.dSkinCheckBox1.CheckFlagColorDisabled = System.Drawing.Color.Gray;
+            this.dSkinCheckBox1.CheckRectBackColorDisabled = System.Drawing.Color.Silver;
+            this.dSkinCheckBox1.CheckRectBackColorHighLight = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(239)))), ((int)(((byte)(219)))));
+            this.dSkinCheckBox1.CheckRectBackColorNormal = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(239)))), ((int)(((byte)(219)))));
+            this.dSkinCheckBox1.CheckRectBackColorPressed = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(226)))), ((int)(((byte)(188)))));
+            this.dSkinCheckBox1.CheckRectColor = System.Drawing.Color.DodgerBlue;
+            this.dSkinCheckBox1.CheckRectColorDisabled = System.Drawing.Color.Gray;
+            this.dSkinCheckBox1.CheckRectWidth = 14;
+            this.dSkinCheckBox1.CheckState = System.Windows.Forms.CheckState.Unchecked;
+            this.dSkinCheckBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dSkinCheckBox1.InnerPaddingWidth = 2;
+            this.dSkinCheckBox1.InnerRectInflate = 3;
+            this.dSkinCheckBox1.Location = new System.Drawing.Point(15, 107);
+            this.dSkinCheckBox1.Name = "dSkinCheckBox1";
+            this.dSkinCheckBox1.Size = new System.Drawing.Size(87, 21);
+            this.dSkinCheckBox1.SpaceBetweenCheckMarkAndText = 3;
+            this.dSkinCheckBox1.TabIndex = 14;
+            this.dSkinCheckBox1.Text = "开机自启动";
+            this.dSkinCheckBox1.TextColorDisabled = System.Drawing.Color.Gray;
+            this.dSkinCheckBox1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            // 
+            // dSkinCheckBox2
+            // 
+            this.dSkinCheckBox2.CheckAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.dSkinCheckBox2.Checked = false;
+            this.dSkinCheckBox2.CheckFlagColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(151)))), ((int)(((byte)(2)))));
+            this.dSkinCheckBox2.CheckFlagColorDisabled = System.Drawing.Color.Gray;
+            this.dSkinCheckBox2.CheckRectBackColorDisabled = System.Drawing.Color.Silver;
+            this.dSkinCheckBox2.CheckRectBackColorHighLight = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(239)))), ((int)(((byte)(219)))));
+            this.dSkinCheckBox2.CheckRectBackColorNormal = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(239)))), ((int)(((byte)(219)))));
+            this.dSkinCheckBox2.CheckRectBackColorPressed = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(226)))), ((int)(((byte)(188)))));
+            this.dSkinCheckBox2.CheckRectColor = System.Drawing.Color.DodgerBlue;
+            this.dSkinCheckBox2.CheckRectColorDisabled = System.Drawing.Color.Gray;
+            this.dSkinCheckBox2.CheckRectWidth = 14;
+            this.dSkinCheckBox2.CheckState = System.Windows.Forms.CheckState.Unchecked;
+            this.dSkinCheckBox2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dSkinCheckBox2.InnerPaddingWidth = 2;
+            this.dSkinCheckBox2.InnerRectInflate = 3;
+            this.dSkinCheckBox2.Location = new System.Drawing.Point(15, 136);
+            this.dSkinCheckBox2.Name = "dSkinCheckBox2";
+            this.dSkinCheckBox2.Size = new System.Drawing.Size(137, 21);
+            this.dSkinCheckBox2.SpaceBetweenCheckMarkAndText = 3;
+            this.dSkinCheckBox2.TabIndex = 15;
+            this.dSkinCheckBox2.Text = "自动保存浏览的图片";
+            this.dSkinCheckBox2.TextColorDisabled = System.Drawing.Color.Gray;
+            this.dSkinCheckBox2.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            // 
+            // dSkinCheckBox3
+            // 
+            this.dSkinCheckBox3.CheckAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.dSkinCheckBox3.Checked = false;
+            this.dSkinCheckBox3.CheckFlagColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(151)))), ((int)(((byte)(2)))));
+            this.dSkinCheckBox3.CheckFlagColorDisabled = System.Drawing.Color.Gray;
+            this.dSkinCheckBox3.CheckRectBackColorDisabled = System.Drawing.Color.Silver;
+            this.dSkinCheckBox3.CheckRectBackColorHighLight = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(239)))), ((int)(((byte)(219)))));
+            this.dSkinCheckBox3.CheckRectBackColorNormal = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(239)))), ((int)(((byte)(219)))));
+            this.dSkinCheckBox3.CheckRectBackColorPressed = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(226)))), ((int)(((byte)(188)))));
+            this.dSkinCheckBox3.CheckRectColor = System.Drawing.Color.DodgerBlue;
+            this.dSkinCheckBox3.CheckRectColorDisabled = System.Drawing.Color.Gray;
+            this.dSkinCheckBox3.CheckRectWidth = 14;
+            this.dSkinCheckBox3.CheckState = System.Windows.Forms.CheckState.Unchecked;
+            this.dSkinCheckBox3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dSkinCheckBox3.InnerPaddingWidth = 2;
+            this.dSkinCheckBox3.InnerRectInflate = 3;
+            this.dSkinCheckBox3.Location = new System.Drawing.Point(15, 168);
+            this.dSkinCheckBox3.Name = "dSkinCheckBox3";
+            this.dSkinCheckBox3.Size = new System.Drawing.Size(137, 21);
+            this.dSkinCheckBox3.SpaceBetweenCheckMarkAndText = 3;
+            this.dSkinCheckBox3.TabIndex = 16;
+            this.dSkinCheckBox3.Text = "更新壁纸后自动退出";
+            this.dSkinCheckBox3.TextColorDisabled = System.Drawing.Color.Gray;
+            this.dSkinCheckBox3.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            // 
+            // TextBox1
+            // 
+            this.TextBox1.BitmapCache = false;
+            this.TextBox1.Font = new System.Drawing.Font("微软雅黑", 9.75F);
+            this.TextBox1.Location = new System.Drawing.Point(16, 42);
+            this.TextBox1.Name = "TextBox1";
+            this.TextBox1.ReadOnly = true;
+            this.TextBox1.Size = new System.Drawing.Size(322, 25);
+            this.TextBox1.TabIndex = 17;
+            this.TextBox1.TransparencyKey = System.Drawing.Color.Empty;
+            this.TextBox1.WaterFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.TextBox1.WaterText = "";
+            this.TextBox1.WaterTextOffset = new System.Drawing.Point(0, 0);
+            // 
+            // dSkinLabel1
+            // 
+            this.dSkinLabel1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dSkinLabel1.Location = new System.Drawing.Point(10, 18);
+            this.dSkinLabel1.Name = "dSkinLabel1";
+            this.dSkinLabel1.Size = new System.Drawing.Size(82, 18);
+            this.dSkinLabel1.TabIndex = 18;
+            this.dSkinLabel1.Text = " 图片保存目录";
+            this.dSkinLabel1.TextRenderMode = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+            // 
+            // dSkinLabel2
+            // 
+            this.dSkinLabel2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dSkinLabel2.Location = new System.Drawing.Point(16, 79);
+            this.dSkinLabel2.Name = "dSkinLabel2";
+            this.dSkinLabel2.Size = new System.Drawing.Size(79, 18);
+            this.dSkinLabel2.TabIndex = 19;
+            this.dSkinLabel2.Text = "分辨率选择：";
+            this.dSkinLabel2.TextRenderMode = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(422, 214);
-            this.Controls.Add(this.skinRadioButton2);
-            this.Controls.Add(this.skinRadioButton1);
-            this.Controls.Add(this.skinLabel2);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(421, 200);
+            this.Controls.Add(this.dSkinLabel2);
+            this.Controls.Add(this.dSkinLabel1);
+            this.Controls.Add(this.TextBox1);
+            this.Controls.Add(this.dSkinCheckBox3);
+            this.Controls.Add(this.dSkinCheckBox2);
+            this.Controls.Add(this.dSkinCheckBox1);
+            this.Controls.Add(this.dSkinRadioButton2);
+            this.Controls.Add(this.dSkinRadioButton1);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.skinTextBox1);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.skinCheckBox3);
-            this.Controls.Add(this.skinCheckBox2);
-            this.Controls.Add(this.skinCheckBox1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.skinLabel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -268,18 +266,17 @@
         }
 
         #endregion
-
-        private CCWin.SkinControl.SkinLabel skinLabel1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        public CCWin.SkinControl.SkinCheckBox skinCheckBox1;
-        public CCWin.SkinControl.SkinCheckBox skinCheckBox2;
-        public CCWin.SkinControl.SkinCheckBox skinCheckBox3;
         private System.Windows.Forms.Button button2;
-        public CCWin.SkinControl.SkinTextBox skinTextBox1;
         public System.Windows.Forms.Button button1;
         public System.Windows.Forms.Button button3;
-        private CCWin.SkinControl.SkinLabel skinLabel2;
-        private CCWin.SkinControl.SkinRadioButton skinRadioButton1;
-        private CCWin.SkinControl.SkinRadioButton skinRadioButton2;
+        private DSkin.Controls.DSkinRadioButton dSkinRadioButton1;
+        private DSkin.Controls.DSkinRadioButton dSkinRadioButton2;
+        private DSkin.Controls.DSkinCheckBox dSkinCheckBox1;
+        private DSkin.Controls.DSkinCheckBox dSkinCheckBox2;
+        private DSkin.Controls.DSkinCheckBox dSkinCheckBox3;
+        private DSkin.Controls.DSkinTextBox TextBox1;
+        private DSkin.Controls.DSkinLabel dSkinLabel1;
+        private DSkin.Controls.DSkinLabel dSkinLabel2;
     }
 }
