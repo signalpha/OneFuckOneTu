@@ -32,7 +32,9 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.设置图片为背景ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.保存图片到目录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.显示美图故事ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.另存为ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.skinPanel1 = new CCWin.SkinControl.SkinPanel();
@@ -47,10 +49,12 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.设置图片为背景ToolStripMenuItem,
             this.保存图片到目录ToolStripMenuItem,
+            this.显示美图故事ToolStripMenuItem,
             this.另存为ToolStripMenuItem,
+            this.关于ToolStripMenuItem,
             this.设置ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 136);
             // 
             // 设置图片为背景ToolStripMenuItem
             // 
@@ -66,12 +70,24 @@
             this.保存图片到目录ToolStripMenuItem.Text = "保存图片到相册";
             this.保存图片到目录ToolStripMenuItem.Click += new System.EventHandler(this.保存图片到目录ToolStripMenuItem_Click);
             // 
+            // 显示美图故事ToolStripMenuItem
+            // 
+            this.显示美图故事ToolStripMenuItem.Name = "显示美图故事ToolStripMenuItem";
+            this.显示美图故事ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.显示美图故事ToolStripMenuItem.Text = "显示美图故事";
+            // 
             // 另存为ToolStripMenuItem
             // 
             this.另存为ToolStripMenuItem.Name = "另存为ToolStripMenuItem";
             this.另存为ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.另存为ToolStripMenuItem.Text = "另存为";
             this.另存为ToolStripMenuItem.Click += new System.EventHandler(this.另存为ToolStripMenuItem_Click);
+            // 
+            // 关于ToolStripMenuItem
+            // 
+            this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
+            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.关于ToolStripMenuItem.Text = "关于";
             // 
             // 设置ToolStripMenuItem
             // 
@@ -125,7 +141,7 @@
             this.skinLabel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.skinLabel1.Size = new System.Drawing.Size(1106, 28);
             this.skinLabel1.TabIndex = 3;
-            this.skinLabel1.Text = "美图故事...";
+            this.skinLabel1.Text = ".............................";
             this.skinLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Form1
@@ -157,6 +173,8 @@
         private System.Windows.Forms.ToolStripMenuItem 设置ToolStripMenuItem;
         private CCWin.SkinControl.SkinPanel skinPanel1;
         private CCWin.SkinControl.SkinLabel skinLabel1;
+        private System.Windows.Forms.ToolStripMenuItem 显示美图故事ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 关于ToolStripMenuItem;
     }
 }
 

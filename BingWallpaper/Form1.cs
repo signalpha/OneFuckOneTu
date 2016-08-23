@@ -25,7 +25,11 @@ namespace BingWallpaper
             //ToolTip toolTip1 = new ToolTip();
             //toolTip1.SetToolTip(skinLabel1, "My button1");
 
-            string imageurl = UrlProcessing();
+
+
+            string zheng = @"(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?.jpg";
+            string url = "http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1";
+            string imageurl = UrlProcessing(url,zheng,0);
 
             if (imageurl != null)
             {
@@ -51,6 +55,10 @@ namespace BingWallpaper
                     MessageBox.Show("图片下载成功，但加载失败，请联系作者");
                 }
 
+                url = "http://cn.bing.com/cnhp/coverstory/";
+                zheng = "\"para1\":\"(?<para1>.*?)\",\"para2\":\"";
+                imageurl = UrlProcessing(url, zheng, 1);
+                skinLabel1.Text = imageurl;
             }
 
 
@@ -182,19 +190,14 @@ namespace BingWallpaper
 
 
         //解析网页图片地址
-        public String UrlProcessing()
+        public string UrlProcessing(string url, string zheng, int location)
         {
-            String url = "http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1";
             byte[] WebContent = null;
-
             try
             {
-
                 WebClient MyWebClient = new WebClient();
-
                 //从网页抓取数据
                 WebContent = MyWebClient.DownloadData(url);
-
             }
             catch (Exception)
             {
@@ -207,21 +210,21 @@ namespace BingWallpaper
             }
 
             //转String
-            String pageHtml = Encoding.Default.GetString(WebContent);
+            string pageHtml = Encoding.UTF8.GetString(WebContent);
 
-            //正则解析出图片地址
-            Regex reg = new Regex(@"(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?.jpg");
+            //正则解析
+            Regex reg = new Regex(zheng);
             MatchCollection mc = reg.Matches(pageHtml);
 
-            String ImageUrl = "";
+            string content = "";
 
-            //获取图片地址
+            //获取数据
             foreach (Match m in mc)
             {
-                ImageUrl = m.Groups[0].ToString();
+                content = m.Groups[location].ToString();
             }
 
-            return ImageUrl;
+            return content;
 
         }
 
