@@ -105,12 +105,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\gear_128px_1153746_easyicon.net.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\QQ图片20160817172742.png" />
-  </ItemGroup>
-  <ItemGroup>
     <COMReference Include="TaskScheduler">
       <Guid>{E34CB9F1-C7F7-424C-BE29-027DCC09363A}</Guid>
       <VersionMajor>1</VersionMajor>

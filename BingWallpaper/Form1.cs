@@ -22,27 +22,25 @@ namespace BingWallpaper
 
             //窗口缩放比例
             PxProcessing(1.5);
-            //ToolTip toolTip1 = new ToolTip();
-            //toolTip1.SetToolTip(skinLabel1, "My button1");
 
 
 
             string zheng = @"(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?.jpg";
             string url = "http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1";
-            string imageurl = UrlProcessing(url,zheng,0);
+            string content = UrlProcessing(url,zheng,0);
 
-            if (imageurl != null)
+            if (content != null)
             {
                 //分辨率设置
                 if (!Properties.Settings.Default.Resolution)
                 {
-                    imageurl = imageurl.Replace("1920x1080", "1366x768");
+                    content = content.Replace("1920x1080", "1366x768");
                 }
 
                 try
                 {
                     //将图片并显示到pictureBox上
-                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(imageurl);
+                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(content);
                     Stream s = request.GetResponse().GetResponseStream();
                     pictureBox1.Image = Image.FromStream(s);
                     s.Dispose();
@@ -57,8 +55,13 @@ namespace BingWallpaper
 
                 url = "http://cn.bing.com/cnhp/coverstory/";
                 zheng = "\"para1\":\"(?<para1>.*?)\",\"para2\":\"";
-                imageurl = UrlProcessing(url, zheng, 1);
-                skinLabel1.Text = imageurl;
+                content = UrlProcessing(url, zheng, 1);
+                skinLabel1.Text = content;
+                ToolTip toolTip1 = new ToolTip();
+                toolTip1.AutoPopDelay = 15 * 1000;
+                toolTip1.SetToolTip(skinLabel1, content);
+
+                //skinPanel1.BackColor = Color.FromArgb(100, 88, 44, 55);
             }
 
 
@@ -149,6 +152,24 @@ namespace BingWallpaper
 
         }
 
+        private void 显示美图故事ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (skinPanel1.Visible)
+            {
+                skinPanel1.Visible = false;
+                contextMenuStrip1.Items[2].Text = "显示美图故事";
+                Properties.Settings.Default.Story = false;
+            }
+            else
+            {
+                skinPanel1.Visible = true;
+                contextMenuStrip1.Items[2].Text = "隐藏美图故事";
+                Properties.Settings.Default.Story = true;
+            }
+
+            Properties.Settings.Default.Save();
+        }
+
         private void 另存为ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string FilePath = File.DialogSaveFileFloder();
@@ -198,6 +219,7 @@ namespace BingWallpaper
                 WebClient MyWebClient = new WebClient();
                 //从网页抓取数据
                 WebContent = MyWebClient.DownloadData(url);
+                MyWebClient.Dispose();
             }
             catch (Exception)
             {
@@ -237,6 +259,18 @@ namespace BingWallpaper
             if (Properties.Settings.Default.SaveImage)
             {
                 保存图片到目录ToolStripMenuItem_Click(null,null);
+            }
+
+            //美图故事
+            if (Properties.Settings.Default.Story)
+            {
+                skinPanel1.Visible = true;
+                contextMenuStrip1.Items[2].Text = "隐藏美图故事";
+            }
+            else
+            {
+                skinPanel1.Visible = false;
+                contextMenuStrip1.Items[2].Text = "显示美图故事";
             }
 
             //没必要在这里判断开机启动项，开机启动项只需要在 应用 被按下才选择是否去创建计划任务。

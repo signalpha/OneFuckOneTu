@@ -34,7 +34,6 @@
             this.保存图片到目录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.显示美图故事ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.另存为ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.skinPanel1 = new CCWin.SkinControl.SkinPanel();
@@ -51,7 +50,6 @@
             this.保存图片到目录ToolStripMenuItem,
             this.显示美图故事ToolStripMenuItem,
             this.另存为ToolStripMenuItem,
-            this.关于ToolStripMenuItem,
             this.设置ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(161, 136);
@@ -75,6 +73,7 @@
             this.显示美图故事ToolStripMenuItem.Name = "显示美图故事ToolStripMenuItem";
             this.显示美图故事ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.显示美图故事ToolStripMenuItem.Text = "显示美图故事";
+            this.显示美图故事ToolStripMenuItem.Click += new System.EventHandler(this.显示美图故事ToolStripMenuItem_Click);
             // 
             // 另存为ToolStripMenuItem
             // 
@@ -82,12 +81,6 @@
             this.另存为ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.另存为ToolStripMenuItem.Text = "另存为";
             this.另存为ToolStripMenuItem.Click += new System.EventHandler(this.另存为ToolStripMenuItem_Click);
-            // 
-            // 关于ToolStripMenuItem
-            // 
-            this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
-            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.关于ToolStripMenuItem.Text = "关于";
             // 
             // 设置ToolStripMenuItem
             // 
@@ -102,7 +95,7 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1108, 624);
+            this.pictureBox1.Size = new System.Drawing.Size(880, 540);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -117,11 +110,11 @@
             this.skinPanel1.ControlState = CCWin.SkinClass.ControlState.Normal;
             this.skinPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.skinPanel1.DownBack = null;
-            this.skinPanel1.Location = new System.Drawing.Point(0, 595);
+            this.skinPanel1.Location = new System.Drawing.Point(0, 511);
             this.skinPanel1.MouseBack = null;
             this.skinPanel1.Name = "skinPanel1";
             this.skinPanel1.NormlBack = null;
-            this.skinPanel1.Size = new System.Drawing.Size(1108, 29);
+            this.skinPanel1.Size = new System.Drawing.Size(880, 29);
             this.skinPanel1.TabIndex = 2;
             // 
             // skinLabel1
@@ -139,7 +132,7 @@
             this.skinLabel1.Name = "skinLabel1";
             this.skinLabel1.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.skinLabel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.skinLabel1.Size = new System.Drawing.Size(1106, 28);
+            this.skinLabel1.Size = new System.Drawing.Size(878, 28);
             this.skinLabel1.TabIndex = 3;
             this.skinLabel1.Text = ".............................";
             this.skinLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -148,7 +141,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1108, 624);
+            this.ClientSize = new System.Drawing.Size(880, 540);
             this.Controls.Add(this.skinPanel1);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -174,7 +167,6 @@
         private CCWin.SkinControl.SkinPanel skinPanel1;
         private CCWin.SkinControl.SkinLabel skinLabel1;
         private System.Windows.Forms.ToolStripMenuItem 显示美图故事ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 关于ToolStripMenuItem;
     }
 }
 

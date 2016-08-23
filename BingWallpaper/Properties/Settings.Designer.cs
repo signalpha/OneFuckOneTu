@@ -82,5 +82,17 @@ namespace BingWallpaper.Properties {
                 this["ImagePath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Story {
+            get {
+                return ((bool)(this["Story"]));
+            }
+            set {
+                this["Story"] = value;
+            }
+        }
     }
 }

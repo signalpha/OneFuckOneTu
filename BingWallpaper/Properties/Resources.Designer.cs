@@ -59,25 +59,5 @@ namespace BingWallpaper.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap gear_128px_1153746_easyicon_net {
-            get {
-                object obj = ResourceManager.GetObject("gear_128px_1153746_easyicon.net", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap QQ图片20160817172742 {
-            get {
-                object obj = ResourceManager.GetObject("QQ图片20160817172742", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }
