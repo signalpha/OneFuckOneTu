@@ -1,8 +1,7 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using TaskScheduler;
 
-namespace BingWallpaper
+namespace OneFuckOneTu
 {
     class OnBoot
     {

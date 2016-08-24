@@ -1,8 +1,7 @@
-﻿using DSkin.Controls;
-using System;
+﻿using System;
 using System.Windows.Forms;
 
-namespace BingWallpaper
+namespace OneFuckOneTu
 {
 
 
@@ -19,10 +18,9 @@ namespace BingWallpaper
             TextBox1.AutoSize = false;
             TextBox1.Height = 26;
 
-
-
-            //Tips(skinCheckBox1, "不建议手动拨号上网的用户开启");
-            //Tips(skinCheckBox2, "每天保存一张壁纸，设置幻灯片放映也是个不错的选择");
+            dSkinToolTip1.SetToolTip(dSkinCheckBox1, "不建议手动拨号上网的用户开启");
+            dSkinToolTip1.SetToolTip(dSkinCheckBox2, "每天保存一张壁纸，设置幻灯片放映也是个不错的选择");
+            dSkinToolTip1.SetToolTip(dSkinCheckBox3, "只在每天第一次打开软件时自动退出");
         }
 
 
@@ -107,17 +105,6 @@ namespace BingWallpaper
 
         }
 
-
-        public void Tips(CheckBox Checkbox,string TipsContent)
-        {
-            ToolTip ttpSettings = new ToolTip();
-            ttpSettings.InitialDelay = 200;
-            ttpSettings.AutoPopDelay = 10 * 1000;
-            ttpSettings.ReshowDelay = 200;
-            ttpSettings.ShowAlways = true;
-            ttpSettings.IsBalloon = true;
-            ttpSettings.SetToolTip(Checkbox, TipsContent);
-        }
 
         //加载用户配置
         public void UserConfig()

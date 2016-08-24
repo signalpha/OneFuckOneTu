@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BingWallpaper.Properties {
+namespace OneFuckOneTu.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -92,6 +92,18 @@ namespace BingWallpaper.Properties {
             }
             set {
                 this["Story"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DataValue {
+            get {
+                return ((string)(this["DataValue"]));
+            }
+            set {
+                this["DataValue"] = value;
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace BingWallpaper
+﻿namespace OneFuckOneTu
 {
     partial class Form2
     {
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -40,6 +41,7 @@
             this.TextBox1 = new DSkin.Controls.DSkinTextBox();
             this.dSkinLabel1 = new DSkin.Controls.DSkinLabel();
             this.dSkinLabel2 = new DSkin.Controls.DSkinLabel();
+            this.dSkinToolTip1 = new DSkin.Controls.DSkinToolTip(this.components);
             this.SuspendLayout();
             // 
             // button1
@@ -235,6 +237,15 @@
             this.dSkinLabel2.Text = "分辨率选择：";
             this.dSkinLabel2.TextRenderMode = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
             // 
+            // dSkinToolTip1
+            // 
+            this.dSkinToolTip1.AutoPopDelay = 5000;
+            this.dSkinToolTip1.InitialDelay = 500;
+            this.dSkinToolTip1.IsBalloon = true;
+            this.dSkinToolTip1.OwnerDraw = true;
+            this.dSkinToolTip1.ReshowDelay = 800;
+            this.dSkinToolTip1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -278,5 +289,6 @@
         private DSkin.Controls.DSkinTextBox TextBox1;
         private DSkin.Controls.DSkinLabel dSkinLabel1;
         private DSkin.Controls.DSkinLabel dSkinLabel2;
+        private DSkin.Controls.DSkinToolTip dSkinToolTip1;
     }
 }

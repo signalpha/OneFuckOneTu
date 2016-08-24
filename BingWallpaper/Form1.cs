@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 
-namespace BingWallpaper
+namespace OneFuckOneTu
 {
     public partial class Form1 : Form
     {
@@ -56,10 +56,10 @@ namespace BingWallpaper
                 url = "http://cn.bing.com/cnhp/coverstory/";
                 zheng = "\"para1\":\"(?<para1>.*?)\",\"para2\":\"";
                 content = UrlProcessing(url, zheng, 1);
-                
-                dSkinHtmlLabel1.Text = content;
 
-                //dSkinHtmlLabel1.Height = dSkinHtmlLabel1.Height;
+                dSkinHtmlLabel1.Text = "<span class = 'fon'>" + content + "</span>";
+
+                dSkinPanel1.Height = dSkinHtmlLabel1.Height + 8;
 
                 //dSkinHtmlLabel1.BackColor = Color.FromArgb(100, 88, 44, 55);
             }
@@ -154,13 +154,13 @@ namespace BingWallpaper
         {
             if (dSkinHtmlLabel1.Visible)
             {
-                dSkinHtmlLabel1.Visible = false;
+                dSkinPanel1.Visible = false;
                 contextMenuStrip1.Items[2].Text = "显示美图故事";
                 Properties.Settings.Default.Story = false;
             }
             else
             {
-                dSkinHtmlLabel1.Visible = true;
+                dSkinPanel1.Visible = true;
                 contextMenuStrip1.Items[2].Text = "隐藏美图故事";
                 Properties.Settings.Default.Story = true;
             }
@@ -262,28 +262,31 @@ namespace BingWallpaper
             //美图故事
             if (Properties.Settings.Default.Story)
             {
-                dSkinHtmlLabel1.Visible = true;
+                dSkinPanel1.Visible = true;
                 contextMenuStrip1.Items[2].Text = "隐藏美图故事";
             }
             else
             {
-                dSkinHtmlLabel1.Visible = false;
+                dSkinPanel1.Visible = false;
                 contextMenuStrip1.Items[2].Text = "显示美图故事";
             }
 
             //没必要在这里判断开机启动项，开机启动项只需要在 应用 被按下才选择是否去创建计划任务。
 
 
-            //更新壁纸自动退出被勾选，不跟UserConfigProcessing()放一起是因为设置应用的时候要调用一次UserConfigProcessing()
-            //if (Properties.Settings.Default.UpdateClose)
-            //{
-            //    if (IamgeExists() == 2)
-            //    {
-            //        设置图片为背景ToolStripMenuItem_Click(null, null);
-            //        Close();
-            //        //Dispose();
-            //    }
-            //}
+            //更新壁纸自动退出被勾选
+            if (Properties.Settings.Default.UpdateClose)
+            {
+                //取今天的日期，和配置文件的日期判断是否相同，如果相同，则不是第一次打开，不执行退出。
+                string data = DateTime.Now.ToString("yyyyMMdd");
+                if (!data.Equals(Properties.Settings.Default.DataValue))
+                {
+                    设置图片为背景ToolStripMenuItem_Click(null, null);
+                    Properties.Settings.Default.DataValue = data;
+                    Properties.Settings.Default.Save();
+                    Environment.Exit(0); //退出真个程序
+                }
+            }
 
         }
 
