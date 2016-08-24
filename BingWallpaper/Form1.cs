@@ -23,7 +23,8 @@ namespace OneFuckOneTu
             //窗口缩放比例
             PxProcessing(1.5);
 
-
+            string ApplicationData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\OneFuckOneTu";
+            MessageBox.Show(ApplicationData);
 
             string zheng = @"(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?.jpg";
             string url = "http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1";

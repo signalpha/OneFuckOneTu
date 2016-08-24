@@ -20,7 +20,7 @@ namespace OneFuckOneTu
 
             dSkinToolTip1.SetToolTip(dSkinCheckBox1, "不建议手动拨号上网的用户开启");
             dSkinToolTip1.SetToolTip(dSkinCheckBox2, "每天保存一张壁纸，设置幻灯片放映也是个不错的选择");
-            dSkinToolTip1.SetToolTip(dSkinCheckBox3, "只在每天第一次打开软件时自动退出");
+            dSkinToolTip1.SetToolTip(dSkinCheckBox3, "只在每天第一次打开软件时更新后自动退出");
         }
 
 
