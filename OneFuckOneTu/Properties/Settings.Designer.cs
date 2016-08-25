@@ -106,5 +106,17 @@ namespace OneFuckOneTu.Properties {
                 this["DataValue"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int ComboBox {
+            get {
+                return ((int)(this["ComboBox"]));
+            }
+            set {
+                this["ComboBox"] = value;
+            }
+        }
     }
 }

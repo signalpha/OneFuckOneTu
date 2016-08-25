@@ -109,8 +109,9 @@
             this.dSkinHtmlLabel1.AutoSizeHeightOnly = true;
             this.dSkinHtmlLabel1.BaseStylesheet = "span{\r\nfont-size: 11pt;\r\n}";
             this.dSkinHtmlLabel1.Borders.TopColor = System.Drawing.Color.Transparent;
-            this.dSkinHtmlLabel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dSkinHtmlLabel1.Location = new System.Drawing.Point(5, 6);
+            this.dSkinHtmlLabel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dSkinHtmlLabel1.Location = new System.Drawing.Point(5, 1);
+            this.dSkinHtmlLabel1.Margin = new System.Windows.Forms.Padding(0);
             this.dSkinHtmlLabel1.Name = "dSkinHtmlLabel1";
             this.dSkinHtmlLabel1.Size = new System.Drawing.Size(835, 20);
             this.dSkinHtmlLabel1.TabIndex = 1;
@@ -125,8 +126,9 @@
             this.dSkinPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dSkinPanel1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dSkinPanel1.Location = new System.Drawing.Point(0, 505);
+            this.dSkinPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.dSkinPanel1.Name = "dSkinPanel1";
-            this.dSkinPanel1.Padding = new System.Windows.Forms.Padding(5, 0, 5, 2);
+            this.dSkinPanel1.Padding = new System.Windows.Forms.Padding(5, 1, 5, 2);
             this.dSkinPanel1.RightBottom = ((System.Drawing.Image)(resources.GetObject("dSkinPanel1.RightBottom")));
             this.dSkinPanel1.Size = new System.Drawing.Size(849, 32);
             this.dSkinPanel1.TabIndex = 2;
@@ -145,6 +147,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bing每日美图";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.dSkinPanel1.ResumeLayout(false);
@@ -161,8 +164,8 @@
         private System.Windows.Forms.ToolStripMenuItem 另存为ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 设置ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 显示美图故事ToolStripMenuItem;
-        private DSkin.Controls.DSkinHtmlLabel dSkinHtmlLabel1;
         private DSkin.Controls.DSkinPanel dSkinPanel1;
+        public DSkin.Controls.DSkinHtmlLabel dSkinHtmlLabel1;
     }
 }
 

@@ -101,6 +101,9 @@ namespace OneFuckOneTu
                 Properties.Settings.Default.Resolution = false;
 
 
+            //空格键选择
+            Properties.Settings.Default.ComboBox = comboBox1.SelectedIndex;
+            
             Properties.Settings.Default.Save();
 
         }
@@ -141,6 +144,9 @@ namespace OneFuckOneTu
                 dSkinRadioButton1.Checked = true;
             else
                 dSkinRadioButton2.Checked = true;
+
+            //快捷键选择
+            comboBox1.SelectedIndex = Properties.Settings.Default.ComboBox;
 
         }
 

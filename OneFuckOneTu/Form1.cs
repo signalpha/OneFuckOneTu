@@ -21,6 +21,8 @@ namespace OneFuckOneTu
             PxProcessing(1.5);
 
 
+
+
             string zheng = @"(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?.jpg";
             string url = "http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1";
             UrlProcessing up = new UrlProcessing();
@@ -60,7 +62,7 @@ namespace OneFuckOneTu
 
                 dSkinHtmlLabel1.Text = "<span class = 'fon'>" + content + "</span>";
 
-                dSkinPanel1.Height = dSkinHtmlLabel1.Height + 8;
+                dSkinPanel1.Height = dSkinHtmlLabel1.Height + 6;
 
             }
 
@@ -268,8 +270,28 @@ namespace OneFuckOneTu
             SystemParametersInfo(20, 0, path, 0x01 | 0x02);
         }
 
+        //空格键被按下
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
 
+            if (e.KeyValue == 32)
+            {
+                switch (Properties.Settings.Default.ComboBox)
+                {
+                    case 1:
+                        设置图片为背景ToolStripMenuItem_Click(null, null);
+                        break;
+                    case 2:
+                        保存图片到目录ToolStripMenuItem_Click(null,null);
+                        break;
+                    case 3:
+                        显示美图故事ToolStripMenuItem_Click(null,null);
+                        break;
+                    
+                }
+            }
+            
 
-
+        }
     }
 }

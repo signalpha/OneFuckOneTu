@@ -42,11 +42,13 @@
             this.dSkinLabel1 = new DSkin.Controls.DSkinLabel();
             this.dSkinLabel2 = new DSkin.Controls.DSkinLabel();
             this.dSkinToolTip1 = new DSkin.Controls.DSkinToolTip(this.components);
+            this.dSkinLabel3 = new DSkin.Controls.DSkinLabel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(334, 41);
+            this.button1.Location = new System.Drawing.Point(304, 41);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 28);
             this.button1.TabIndex = 2;
@@ -65,7 +67,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(334, 161);
+            this.button3.Location = new System.Drawing.Point(304, 190);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 28);
             this.button3.TabIndex = 8;
@@ -142,7 +144,7 @@
             this.dSkinCheckBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dSkinCheckBox1.InnerPaddingWidth = 2;
             this.dSkinCheckBox1.InnerRectInflate = 3;
-            this.dSkinCheckBox1.Location = new System.Drawing.Point(15, 107);
+            this.dSkinCheckBox1.Location = new System.Drawing.Point(16, 137);
             this.dSkinCheckBox1.Name = "dSkinCheckBox1";
             this.dSkinCheckBox1.Size = new System.Drawing.Size(87, 21);
             this.dSkinCheckBox1.SpaceBetweenCheckMarkAndText = 3;
@@ -168,7 +170,7 @@
             this.dSkinCheckBox2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dSkinCheckBox2.InnerPaddingWidth = 2;
             this.dSkinCheckBox2.InnerRectInflate = 3;
-            this.dSkinCheckBox2.Location = new System.Drawing.Point(15, 136);
+            this.dSkinCheckBox2.Location = new System.Drawing.Point(16, 166);
             this.dSkinCheckBox2.Name = "dSkinCheckBox2";
             this.dSkinCheckBox2.Size = new System.Drawing.Size(137, 21);
             this.dSkinCheckBox2.SpaceBetweenCheckMarkAndText = 3;
@@ -195,7 +197,7 @@
             this.dSkinCheckBox3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dSkinCheckBox3.InnerPaddingWidth = 2;
             this.dSkinCheckBox3.InnerRectInflate = 3;
-            this.dSkinCheckBox3.Location = new System.Drawing.Point(15, 168);
+            this.dSkinCheckBox3.Location = new System.Drawing.Point(16, 198);
             this.dSkinCheckBox3.Name = "dSkinCheckBox3";
             this.dSkinCheckBox3.Size = new System.Drawing.Size(137, 21);
             this.dSkinCheckBox3.SpaceBetweenCheckMarkAndText = 3;
@@ -211,7 +213,7 @@
             this.TextBox1.Location = new System.Drawing.Point(16, 42);
             this.TextBox1.Name = "TextBox1";
             this.TextBox1.ReadOnly = true;
-            this.TextBox1.Size = new System.Drawing.Size(322, 25);
+            this.TextBox1.Size = new System.Drawing.Size(290, 25);
             this.TextBox1.TabIndex = 17;
             this.TextBox1.TransparencyKey = System.Drawing.Color.Empty;
             this.TextBox1.WaterFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -247,12 +249,40 @@
             this.dSkinToolTip1.ReshowDelay = 800;
             this.dSkinToolTip1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
             // 
+            // dSkinLabel3
+            // 
+            this.dSkinLabel3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dSkinLabel3.Location = new System.Drawing.Point(16, 108);
+            this.dSkinLabel3.Name = "dSkinLabel3";
+            this.dSkinLabel3.Size = new System.Drawing.Size(79, 18);
+            this.dSkinLabel3.TabIndex = 20;
+            this.dSkinLabel3.Text = "空格键绑定：";
+            this.dSkinLabel3.TextRenderMode = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.Font = new System.Drawing.Font("新宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.ItemHeight = 12;
+            this.comboBox1.Items.AddRange(new object[] {
+            "无",
+            "设置图像为背景",
+            "保存图片到目录",
+            "开关美图故事"});
+            this.comboBox1.Location = new System.Drawing.Point(97, 106);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(106, 20);
+            this.comboBox1.TabIndex = 23;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(421, 200);
+            this.ClientSize = new System.Drawing.Size(389, 228);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.dSkinLabel3);
             this.Controls.Add(this.dSkinLabel2);
             this.Controls.Add(this.dSkinLabel1);
             this.Controls.Add(this.TextBox1);
@@ -291,5 +321,7 @@
         private DSkin.Controls.DSkinLabel dSkinLabel1;
         private DSkin.Controls.DSkinLabel dSkinLabel2;
         private DSkin.Controls.DSkinToolTip dSkinToolTip1;
+        private DSkin.Controls.DSkinLabel dSkinLabel3;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
