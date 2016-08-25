@@ -15,12 +15,14 @@ namespace OneFuckOneTu
             //加载用户配置
             UserConfig();
 
-            TextBox1.AutoSize = false;
-            TextBox1.Height = 26;
+            textBox1.AutoSize = false;
+            textBox1.Height = 26;
 
-            dSkinToolTip1.SetToolTip(dSkinCheckBox1, "不建议手动拨号上网的用户开启");
-            dSkinToolTip1.SetToolTip(dSkinCheckBox2, "每天保存一张壁纸，设置幻灯片放映也是个不错的选择");
-            dSkinToolTip1.SetToolTip(dSkinCheckBox3, "只在每天第一次打开软件时更新后自动退出");
+            ToolTip tp = new ToolTip();
+
+            tp.SetToolTip(checkBox1, "不建议手动拨号上网的用户开启");
+            tp.SetToolTip(checkBox2, "每天保存一张壁纸，设置幻灯片放映也是个不错的选择");
+            tp.SetToolTip(checkBox3, "只在每天第一次打开软件时更新后自动退出");
         }
 
 
@@ -30,7 +32,7 @@ namespace OneFuckOneTu
             string path = File.DialogFloder();
             if (path != null)
             {
-                TextBox1.Text = path;
+                textBox1.Text = path;
             }
             
 
@@ -41,11 +43,11 @@ namespace OneFuckOneTu
 
 
             //保存目录
-            Properties.Settings.Default.ImagePath = TextBox1.Text;
+            Properties.Settings.Default.ImagePath = textBox1.Text;
 
 
             //开机启动
-            if (dSkinCheckBox1.Checked)
+            if (checkBox1.Checked)
             {
                 string taskname = "one_fuck_one_tu";
                 if (!OnBoot.TaskIsExists(taskname))
@@ -82,20 +84,20 @@ namespace OneFuckOneTu
             }
 
             //更新壁纸保存
-            if (dSkinCheckBox2.Checked)
+            if (checkBox2.Checked)
                 Properties.Settings.Default.SaveImage = true;
             else
                 Properties.Settings.Default.SaveImage = false;
 
 
             //更新壁纸退出
-            if (dSkinCheckBox3.Checked)
+            if (checkBox3.Checked)
                 Properties.Settings.Default.UpdateClose = true;
             else
                 Properties.Settings.Default.UpdateClose = false;
 
             //分辨率选项
-            if (dSkinRadioButton1.Checked)
+            if (radioButton1.Checked)
                 Properties.Settings.Default.Resolution = true;
             else
                 Properties.Settings.Default.Resolution = false;
@@ -115,35 +117,35 @@ namespace OneFuckOneTu
 
             //保存目录
             if (String.Equals(Properties.Settings.Default.ImagePath, ""))
-                TextBox1.Text = "";
+                textBox1.Text = "";
             else
-                TextBox1.Text = Properties.Settings.Default.ImagePath;
+                textBox1.Text = Properties.Settings.Default.ImagePath;
 
 
             //开机启动
             if (Properties.Settings.Default.BootOpen)
-                dSkinCheckBox1.Checked = true;
+                checkBox1.Checked = true;
             else
-                dSkinCheckBox1.Checked = false;
+                checkBox1.Checked = false;
             
 
             //自动保存壁纸
             if (Properties.Settings.Default.SaveImage)
-                dSkinCheckBox2.Checked = true;
+                checkBox2.Checked = true;
             else
-                dSkinCheckBox2.Checked = false;
+                checkBox2.Checked = false;
 
             //更新壁纸自动推出
             if (Properties.Settings.Default.UpdateClose)
-                dSkinCheckBox3.Checked = true;
+                checkBox3.Checked = true;
             else
-                dSkinCheckBox3.Checked = false;
+                checkBox3.Checked = false;
 
             //分辨率选择，真为1920，假为1366
             if (Properties.Settings.Default.Resolution)
-                dSkinRadioButton1.Checked = true;
+                radioButton1.Checked = true;
             else
-                dSkinRadioButton2.Checked = true;
+                radioButton2.Checked = true;
 
             //快捷键选择
             comboBox1.SelectedIndex = Properties.Settings.Default.ComboBox;
@@ -153,10 +155,10 @@ namespace OneFuckOneTu
 
         private void dSkinCheckBox2_MouseClick(object sender, MouseEventArgs e)
         {
-            if (TextBox1.Text.Length < 3)
+            if (textBox1.Text.Length < 3)
             {
                 MessageBox.Show("需先设置路径");
-                dSkinCheckBox2.Checked = true;
+                checkBox2.Checked = true;
             }
         }
     }

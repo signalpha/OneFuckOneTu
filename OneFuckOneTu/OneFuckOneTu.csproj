@@ -41,11 +41,13 @@
     <ApplicationIcon>128px_572059.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DSkin">
-      <HintPath>..\..\..\..\winform第三方库\新建文件夹 (4)\【4.0】DSkin20160823224723\DSkin.dll</HintPath>
+    <Reference Include="HtmlRenderer, Version=1.5.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlRenderer.Core.1.5.0.6\lib\net45\HtmlRenderer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="DSkin.Design">
-      <HintPath>..\..\..\..\winform第三方库\新建文件夹 (4)\【4.0】DSkin20160823224723\DSkin.Design.dll</HintPath>
+    <Reference Include="HtmlRenderer.WinForms, Version=1.5.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlRenderer.WinForms.1.5.0.6\lib\net45\HtmlRenderer.WinForms.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />

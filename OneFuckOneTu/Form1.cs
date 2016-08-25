@@ -20,9 +20,6 @@ namespace OneFuckOneTu
             //窗口缩放比例
             PxProcessing(1.5);
 
-
-
-
             string zheng = @"(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?.jpg";
             string url = "http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1";
             UrlProcessing up = new UrlProcessing();
@@ -59,10 +56,13 @@ namespace OneFuckOneTu
                 url = "http://cn.bing.com/cnhp/coverstory/";
                 zheng = "\"para1\":\"(?<para1>.*?)\",\"para2\":\"";
                 content = up.UrlParsing(url, zheng, 1);
-
-                dSkinHtmlLabel1.Text = "<span class = 'fon'>" + content + "</span>";
-
-                dSkinPanel1.Height = dSkinHtmlLabel1.Height + 6;
+                
+                TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel htmlLabel = new TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel();
+                htmlLabel.Text = "<span style = 'color:#292524; line-height:25px;'>" + content + "</span>";
+                htmlLabel.Dock = DockStyle.Fill;
+                htmlLabel.AutoSizeHeightOnly = true;
+                panel1.Controls.Add(htmlLabel);
+                panel1.Height = htmlLabel.Height + 6;
 
             }
 
@@ -148,15 +148,15 @@ namespace OneFuckOneTu
 
         private void 显示美图故事ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (dSkinHtmlLabel1.Visible)
+            if (panel1.Visible)
             {
-                dSkinPanel1.Visible = false;
+                panel1.Visible = false;
                 contextMenuStrip1.Items[2].Text = "显示美图故事";
                 Properties.Settings.Default.Story = false;
             }
             else
             {
-                dSkinPanel1.Visible = true;
+                panel1.Visible = true;
                 contextMenuStrip1.Items[2].Text = "隐藏美图故事";
                 Properties.Settings.Default.Story = true;
             }
@@ -219,12 +219,12 @@ namespace OneFuckOneTu
             //美图故事
             if (Properties.Settings.Default.Story)
             {
-                dSkinPanel1.Visible = true;
+                panel1.Visible = true;
                 contextMenuStrip1.Items[2].Text = "隐藏美图故事";
             }
             else
             {
-                dSkinPanel1.Visible = false;
+                panel1.Visible = false;
                 contextMenuStrip1.Items[2].Text = "显示美图故事";
             }
 
@@ -269,6 +269,8 @@ namespace OneFuckOneTu
         {
             SystemParametersInfo(20, 0, path, 0x01 | 0x02);
         }
+
+
 
         //空格键被按下
         private void Form1_KeyDown(object sender, KeyEventArgs e)
