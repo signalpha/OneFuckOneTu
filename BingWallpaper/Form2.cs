@@ -136,7 +136,7 @@ namespace OneFuckOneTu
             else
                 dSkinCheckBox3.Checked = false;
 
-            //更新壁纸自动推出
+            //分辨率选择，真为1920，假为1366
             if (Properties.Settings.Default.Resolution)
                 dSkinRadioButton1.Checked = true;
             else
@@ -144,12 +144,13 @@ namespace OneFuckOneTu
 
         }
 
-        private void skinCheckBox2_MouseClick(object sender, MouseEventArgs e)
+
+        private void dSkinCheckBox2_MouseClick(object sender, MouseEventArgs e)
         {
             if (TextBox1.Text.Length < 3)
             {
                 MessageBox.Show("需先设置路径");
-                dSkinCheckBox2.Checked = false;
+                dSkinCheckBox2.Checked = true;
             }
         }
     }

@@ -2,10 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Net;
-using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 
@@ -23,12 +20,11 @@ namespace OneFuckOneTu
             //窗口缩放比例
             PxProcessing(1.5);
 
-            string ApplicationData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\OneFuckOneTu";
-            MessageBox.Show(ApplicationData);
 
             string zheng = @"(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?.jpg";
             string url = "http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1";
-            string content = UrlProcessing(url,zheng,0);
+            UrlProcessing up = new UrlProcessing();
+            string content = up.UrlParsing(url,zheng,0);
 
             if (content != null)
             {
@@ -44,7 +40,11 @@ namespace OneFuckOneTu
                     HttpWebRequest request = (HttpWebRequest)WebRequest.Create(content);
                     Stream s = request.GetResponse().GetResponseStream();
                     pictureBox1.Image = Image.FromStream(s);
-                    s.Dispose();
+                    s.Dispose(); //释放资源
+
+                    //讲图片保存到配置路径作为缓存
+                    string SettingPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\OneFuckOneTu\\CacheImage.jpg";
+                    pictureBox1.Image.Save(SettingPath);
 
                     //取配置处理
                     UserConfigProcessing();
@@ -56,13 +56,12 @@ namespace OneFuckOneTu
 
                 url = "http://cn.bing.com/cnhp/coverstory/";
                 zheng = "\"para1\":\"(?<para1>.*?)\",\"para2\":\"";
-                content = UrlProcessing(url, zheng, 1);
+                content = up.UrlParsing(url, zheng, 1);
 
                 dSkinHtmlLabel1.Text = "<span class = 'fon'>" + content + "</span>";
 
                 dSkinPanel1.Height = dSkinHtmlLabel1.Height + 8;
 
-                //dSkinHtmlLabel1.BackColor = Color.FromArgb(100, 88, 44, 55);
             }
 
 
@@ -88,7 +87,7 @@ namespace OneFuckOneTu
 
             if (pictureBox1.Image != null)
             {
-                string path = "";
+                string path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\OneFuckOneTu\\CacheImage.jpg";
 
                 //判断系统是win7还是win10
                 Version currentVersion = Environment.OSVersion.Version;
@@ -96,20 +95,14 @@ namespace OneFuckOneTu
                 if (currentVersion.CompareTo(compareToVersion) >= 0)
                 {
                     //win8及其以上版本的系统
-                    path = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
-                    pictureBox1.Image.Save(path);
                     SetWallpaper(path);
-                    System.IO.File.Delete(path);
 
                 }
                 else
                 {
-                    path = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
-                    pictureBox1.Image.Save(path);
                     string bmppath = JpgToBmp(path);
                     SetWallpaper(bmppath);
                     System.IO.File.Delete(bmppath);
-                    System.IO.File.Delete(path);
                 }
             }
             else
@@ -208,46 +201,7 @@ namespace OneFuckOneTu
             this.Width = (int)width;
         }
 
-
-        //解析网页图片地址
-        public string UrlProcessing(string url, string zheng, int location)
-        {
-            byte[] WebContent = null;
-            try
-            {
-                WebClient MyWebClient = new WebClient();
-                //从网页抓取数据
-                WebContent = MyWebClient.DownloadData(url);
-                MyWebClient.Dispose();
-            }
-            catch (Exception)
-            {
-                //判断是否联网
-                if (ping())
-                    MessageBox.Show("有网络但图片获取失败，请联系作者");
-                else
-                    MessageBox.Show("无网络链接，图片获取失败");
-                return null;
-            }
-
-            //转String
-            string pageHtml = Encoding.UTF8.GetString(WebContent);
-
-            //正则解析
-            Regex reg = new Regex(zheng);
-            MatchCollection mc = reg.Matches(pageHtml);
-
-            string content = "";
-
-            //获取数据
-            foreach (Match m in mc)
-            {
-                content = m.Groups[location].ToString();
-            }
-
-            return content;
-
-        }
+        
 
 
         //用户配置信息处理
@@ -291,34 +245,14 @@ namespace OneFuckOneTu
 
         }
 
-
-        //判断是否联网
-        public bool ping()
-        {
-            try
-            {
-                Ping ping = new Ping();
-                PingReply pr = ping.Send("www.baidu.com");
-
-                if (pr.Status == IPStatus.Success)
-                {
-                    return true;
-                }
-
-                return false;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+        
 
 
         //jpg转bmp方法，用于win7系统
         public string JpgToBmp(string path)
         {
-            string bmppath = Environment.CurrentDirectory + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".bmp";
-            Bitmap bm = new System.Drawing.Bitmap(path);
+            string bmppath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\OneFuckOneTu\\CacheImage.bmp";
+            Bitmap bm = new Bitmap(path);
             bm.Save(bmppath, System.Drawing.Imaging.ImageFormat.Bmp);
             bm.Dispose();   //释放资源
             return bmppath;

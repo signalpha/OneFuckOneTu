@@ -176,6 +176,7 @@
             this.dSkinCheckBox2.Text = "自动保存浏览的图片";
             this.dSkinCheckBox2.TextColorDisabled = System.Drawing.Color.Gray;
             this.dSkinCheckBox2.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            this.dSkinCheckBox2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dSkinCheckBox2_MouseClick);
             // 
             // dSkinCheckBox3
             // 
