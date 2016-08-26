@@ -174,7 +174,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 17);
             this.label3.TabIndex = 31;
-            this.label3.Text = "快捷键绑定：";
+            this.label3.Text = "空格键绑定：";
             // 
             // textBox1
             // 

@@ -11,7 +11,7 @@ namespace OneFuckOneTu
     public partial class Form1 : Form
     {
 
-
+        TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel htmlLabel;
 
         public Form1()
         {
@@ -45,8 +45,7 @@ namespace OneFuckOneTu
                     string SettingPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\OneFuckOneTu\\CacheImage.jpg";
                     pictureBox1.Image.Save(SettingPath);
 
-                    //取配置处理
-                    UserConfigProcessing();
+                    
                 }
                 catch (Exception)
                 {
@@ -56,13 +55,20 @@ namespace OneFuckOneTu
                 url = "http://cn.bing.com/cnhp/coverstory/";
                 zheng = "\"para1\":\"(?<para1>.*?)\",\"para2\":\"";
                 content = up.UrlParsing(url, zheng, 1);
-                
-                TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel htmlLabel = new TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel();
-                htmlLabel.Text = "<span style = 'color:#292524; line-height:25px;'>" + content + "</span>";
-                htmlLabel.Dock = DockStyle.Fill;
+
+                //创建htmllabel
+                htmlLabel = new TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel();
+                //htmlLabel.Text = "<span style = 'color:#292524;line-height:25px;'>" + content + "</span>";
+                htmlLabel.Text = "<span><div style='padding: 3px; '>" + content + "</div></span>";
+                htmlLabel.Dock = DockStyle.Bottom;
                 htmlLabel.AutoSizeHeightOnly = true;
-                panel1.Controls.Add(htmlLabel);
-                panel1.Height = htmlLabel.Height + 6;
+                htmlLabel.BorderStyle = BorderStyle.Fixed3D;
+                pictureBox1.Controls.Add(htmlLabel);
+                
+                MessageBox.Show(htmlLabel.Height.ToString());
+
+                //取配置处理
+                UserConfigProcessing(); 
 
             }
 
@@ -104,6 +110,34 @@ namespace OneFuckOneTu
                 }
 
             }
+        }
+
+
+        //最大化和还原时重新格式化htmllabel
+        public FormWindowState oldWindowState = FormWindowState.Normal;
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+
+            if (Properties.Settings.Default.Story)
+            {
+                //软件启动的时候窗口大小会作两次改变,所以这里先将窗口状态存储到变量中,避免开启时的两次状态改变.
+                if (oldWindowState != WindowState)
+                {
+                    显示美图故事ToolStripMenuItem_Click(null, null);
+                    显示美图故事ToolStripMenuItem_Click(null, null);
+                    //MessageBox.Show("我被还原了了");
+                    oldWindowState = FormWindowState.Maximized;
+                }
+
+
+                if (WindowState == FormWindowState.Maximized)
+                {
+                    显示美图故事ToolStripMenuItem_Click(null, null);
+                    显示美图故事ToolStripMenuItem_Click(null, null);
+                    //MessageBox.Show("最大化被单击了");
+                }
+            }
+
         }
 
 
@@ -171,15 +205,15 @@ namespace OneFuckOneTu
 
         private void 显示美图故事ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (panel1.Visible)
+            if (htmlLabel.Visible)
             {
-                panel1.Visible = false;
+                htmlLabel.Visible = false;
                 contextMenuStrip1.Items[2].Text = "显示美图故事";
                 Properties.Settings.Default.Story = false;
             }
             else
             {
-                panel1.Visible = true;
+                htmlLabel.Visible = true;
                 contextMenuStrip1.Items[2].Text = "隐藏美图故事";
                 Properties.Settings.Default.Story = true;
             }
@@ -242,12 +276,12 @@ namespace OneFuckOneTu
             //美图故事
             if (Properties.Settings.Default.Story)
             {
-                panel1.Visible = true;
+                htmlLabel.Visible = true;
                 contextMenuStrip1.Items[2].Text = "隐藏美图故事";
             }
             else
             {
-                panel1.Visible = false;
+                htmlLabel.Visible = false;
                 contextMenuStrip1.Items[2].Text = "显示美图故事";
             }
 
@@ -270,8 +304,6 @@ namespace OneFuckOneTu
 
         }
 
-        
-
 
         //jpg转bmp方法，用于win7系统
         public string JpgToBmp(string path)
@@ -292,6 +324,10 @@ namespace OneFuckOneTu
         {
             SystemParametersInfo(20, 0, path, 0x01 | 0x02);
         }
+
+
+
+
 
     }
 }
