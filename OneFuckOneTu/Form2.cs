@@ -39,6 +39,14 @@ namespace OneFuckOneTu
         }
 
 
+        private void checkBox2_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (textBox1.Text.Length < 3)
+            {
+                MessageBox.Show("需先设置路径");
+                checkBox2.Checked = false;
+            }
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -47,9 +55,9 @@ namespace OneFuckOneTu
             {
                 textBox1.Text = path;
             }
-            
-
         }
+
+        
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -97,7 +105,7 @@ namespace OneFuckOneTu
                 }
             }
 
-            //更新壁纸保存
+            //壁纸保存
             if (checkBox2.Checked)
                 Settings.Default.SaveImage = true;
             else
@@ -166,13 +174,6 @@ namespace OneFuckOneTu
 
         }
 
-        private void checkBox2_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (textBox1.Text.Length < 3)
-            {
-                MessageBox.Show("需先设置路径");
-                checkBox2.Checked = false;
-            }
-        }
+        
     }
 }

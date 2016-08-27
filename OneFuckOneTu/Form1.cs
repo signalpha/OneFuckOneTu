@@ -26,6 +26,13 @@ namespace OneFuckOneTu
             PxProcessing(1.5);
 
 
+            //创建htmllabel
+            htmlLabel = new TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel();
+            htmlLabel.Dock = DockStyle.Bottom;
+            htmlLabel.AutoSizeHeightOnly = true;
+            htmlLabel.BorderStyle = BorderStyle.Fixed3D;
+
+
             string zheng = @"(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?.jpg";
             string url = "http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1";
             UrlProcessing up = new UrlProcessing();
@@ -61,25 +68,32 @@ namespace OneFuckOneTu
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("图片下载成功，但加载失败，尝试重新打开软件");
+                    htmlLabel.Text = "<span><div style='padding: 3px 4px; font: 9.5pt; '>" + "出现异常，请尝试重新打开软件" + "</div></span>";
+                    pictureBox1.Controls.Add(htmlLabel);
+                    htmlLabel.Visible = true;
+                    return;
                 }
 
-                
+                //取美图故事
                 url = "http://cn.bing.com/cnhp/coverstory/";
                 zheng = "\"para1\":\"(?<para1>.*?)\",\"para2\":\"";
                 content = up.UrlParsing(url, zheng, 1);
-
-                //创建htmllabel
-                htmlLabel = new TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel();
-                htmlLabel.Text = "<span><div style='padding: 3px; '>" + content + "</div></span>";
-                htmlLabel.Dock = DockStyle.Bottom;
-                htmlLabel.AutoSizeHeightOnly = true;
-                htmlLabel.BorderStyle = BorderStyle.Fixed3D;
+                htmlLabel.Text = "<span><div style='padding: 3px 4px; font: 9.5pt; '>" + content + "</div></span>";
                 pictureBox1.Controls.Add(htmlLabel);
-                
+
                 //取配置处理
                 UserConfigProcessing(); 
 
+            }
+            else
+            {
+                if (UrlProcessing.ping())
+                    htmlLabel.Text = "<span><div style='padding: 3px 4px; font: 9.5pt; '>" + "有网络但下载图片失败" + "</div></span>";
+                else
+                    htmlLabel.Text = "<span><div style='padding: 3px 4px; font: 9.5pt; '>" + "无网络链接，图片获取失败" + "</div></span>";
+
+                pictureBox1.Controls.Add(htmlLabel);
+                htmlLabel.Visible = true;
             }
 
 
@@ -89,6 +103,8 @@ namespace OneFuckOneTu
             else
                 this.Text = "Bing每日美图";
         }
+
+
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {

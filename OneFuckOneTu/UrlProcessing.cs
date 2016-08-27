@@ -24,11 +24,11 @@ namespace OneFuckOneTu
             }
             catch (Exception)
             {
-                //判断是否联网
-                if (ping())
-                    MessageBox.Show("有网络但图片获取失败，请联系作者");
-                else
-                    MessageBox.Show("无网络链接，图片获取失败");
+                ////判断是否联网
+                //if (ping())
+                //    MessageBox.Show("有网络但图片获取失败，请联系作者");
+                //else
+                //    MessageBox.Show("无网络链接，图片获取失败");
                 return null;
             }
 
@@ -53,7 +53,7 @@ namespace OneFuckOneTu
 
 
         //判断是否联网
-        public bool ping()
+        public static bool ping()
         {
             try
             {
