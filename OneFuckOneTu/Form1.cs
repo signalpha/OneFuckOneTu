@@ -4,7 +4,7 @@ using System.IO;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-
+using OneFuckOneTu.Properties;
 
 namespace OneFuckOneTu
 {
@@ -17,8 +17,10 @@ namespace OneFuckOneTu
         {
             InitializeComponent();
 
-            //窗口缩放比例
+
+            //设置窗口大小
             PxProcessing(1.5);
+
 
             string zheng = @"(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?.jpg";
             string url = "http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1";
@@ -28,7 +30,7 @@ namespace OneFuckOneTu
             if (content != null)
             {
                 //分辨率设置
-                if (!Properties.Settings.Default.Resolution)
+                if (!Settings.Default.Resolution)
                 {
                     content = content.Replace("1920x1080", "1366x768");
                 }
@@ -42,31 +44,35 @@ namespace OneFuckOneTu
                     s.Dispose(); //释放资源
 
                     //讲图片保存到配置路径作为缓存
-                    string SettingPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\OneFuckOneTu\\CacheImage.jpg";
-                    pictureBox1.Image.Save(SettingPath);
+                    string SettingPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\OneFuckOneTu";
+                    string cachePath = SettingPath + "\\CacheImage.jpg";
 
-                    
+                    //不存在路径就创建
+                    if (!Directory.Exists(SettingPath))
+                    {
+                        Directory.CreateDirectory(SettingPath);
+                    }
+
+                    pictureBox1.Image.Save(cachePath);
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("图片下载成功，但加载失败，请联系作者");
+                    MessageBox.Show("图片下载成功，但加载失败，尝试重新打开软件");
                 }
 
+                
                 url = "http://cn.bing.com/cnhp/coverstory/";
                 zheng = "\"para1\":\"(?<para1>.*?)\",\"para2\":\"";
                 content = up.UrlParsing(url, zheng, 1);
 
                 //创建htmllabel
                 htmlLabel = new TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel();
-                //htmlLabel.Text = "<span style = 'color:#292524;line-height:25px;'>" + content + "</span>";
                 htmlLabel.Text = "<span><div style='padding: 3px; '>" + content + "</div></span>";
                 htmlLabel.Dock = DockStyle.Bottom;
                 htmlLabel.AutoSizeHeightOnly = true;
                 htmlLabel.BorderStyle = BorderStyle.Fixed3D;
                 pictureBox1.Controls.Add(htmlLabel);
                 
-                MessageBox.Show(htmlLabel.Height.ToString());
-
                 //取配置处理
                 UserConfigProcessing(); 
 
@@ -95,7 +101,7 @@ namespace OneFuckOneTu
         {
             if (e.KeyValue == 32)
             {
-                switch (Properties.Settings.Default.ComboBox)
+                switch (Settings.Default.ComboBox)
                 {
                     case 1:
                         设置图片为背景ToolStripMenuItem_Click(null, null);
@@ -118,7 +124,7 @@ namespace OneFuckOneTu
         private void Form1_Resize(object sender, EventArgs e)
         {
 
-            if (Properties.Settings.Default.Story)
+            if (Settings.Default.Story)
             {
                 //软件启动的时候窗口大小会作两次改变,所以这里先将窗口状态存储到变量中,避免开启时的两次状态改变.
                 if (oldWindowState != WindowState)
@@ -139,6 +145,7 @@ namespace OneFuckOneTu
             }
 
         }
+
 
 
         private void 设置图片为背景ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -179,11 +186,11 @@ namespace OneFuckOneTu
 
             if (pictureBox1.Image != null)
             {
-                string ImagePath = Properties.Settings.Default.ImagePath;
+                string ImagePath = Settings.Default.ImagePath;
                 string Image = ImagePath + "\\" + DateTime.Now.ToString("yyyyMMdd") + ".jpg";
 
                 //先判断自动保存壁纸有没有被勾选，如果被勾选，路径一定存在
-                if (Properties.Settings.Default.SaveImage)
+                if (Settings.Default.SaveImage)
                 {
                     pictureBox1.Image.Save(Image);
                 }
@@ -209,16 +216,16 @@ namespace OneFuckOneTu
             {
                 htmlLabel.Visible = false;
                 contextMenuStrip1.Items[2].Text = "显示美图故事";
-                Properties.Settings.Default.Story = false;
+                Settings.Default.Story = false;
             }
             else
             {
                 htmlLabel.Visible = true;
                 contextMenuStrip1.Items[2].Text = "隐藏美图故事";
-                Properties.Settings.Default.Story = true;
+                Settings.Default.Story = true;
             }
 
-            Properties.Settings.Default.Save();
+            Settings.Default.Save();
         }
 
         private void 另存为ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -268,13 +275,13 @@ namespace OneFuckOneTu
         {
             
             //自动保存图片被勾选
-            if (Properties.Settings.Default.SaveImage)
+            if (Settings.Default.SaveImage)
             {
                 保存图片到目录ToolStripMenuItem_Click(null,null);
             }
 
             //美图故事
-            if (Properties.Settings.Default.Story)
+            if (Settings.Default.Story)
             {
                 htmlLabel.Visible = true;
                 contextMenuStrip1.Items[2].Text = "隐藏美图故事";
@@ -289,15 +296,15 @@ namespace OneFuckOneTu
 
 
             //更新壁纸自动退出被勾选
-            if (Properties.Settings.Default.UpdateClose)
+            if (Settings.Default.UpdateClose)
             {
                 //取今天的日期，和配置文件的日期判断是否相同，如果相同，则不是第一次打开，不执行退出。
                 string data = DateTime.Now.ToString("yyyyMMdd");
-                if (!data.Equals(Properties.Settings.Default.DataValue))
+                if (!data.Equals(Settings.Default.DataValue))
                 {
                     设置图片为背景ToolStripMenuItem_Click(null, null);
-                    Properties.Settings.Default.DataValue = data;
-                    Properties.Settings.Default.Save();
+                    Settings.Default.DataValue = data;
+                    Settings.Default.Save();
                     Environment.Exit(0); //退出真个程序
                 }
             }
@@ -325,9 +332,6 @@ namespace OneFuckOneTu
             SystemParametersInfo(20, 0, path, 0x01 | 0x02);
         }
 
-
-
-
-
+        
     }
 }

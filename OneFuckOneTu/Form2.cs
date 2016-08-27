@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using OneFuckOneTu.Properties;
 
 namespace OneFuckOneTu
 {
@@ -20,7 +21,7 @@ namespace OneFuckOneTu
 
             ToolTip tp = new ToolTip();
 
-            tp.SetToolTip(checkBox1, "不建议手动拨号上网的用户开启");
+            tp.SetToolTip(checkBox1, "需以管理员模式开启，不建议手动拨号上网的用户开启");
             tp.SetToolTip(checkBox2, "每天保存一张壁纸，设置幻灯片放映也是个不错的选择");
             tp.SetToolTip(checkBox3, "只在每天第一次打开软件时更新后自动退出");
         }
@@ -43,7 +44,7 @@ namespace OneFuckOneTu
 
 
             //保存目录
-            Properties.Settings.Default.ImagePath = textBox1.Text;
+            Settings.Default.ImagePath = textBox1.Text;
 
 
             //开机启动
@@ -56,14 +57,16 @@ namespace OneFuckOneTu
                     {
                         string strAssName = Application.ExecutablePath;
                         OnBoot.TaskCreate(taskname, strAssName);
+                        Settings.Default.BootOpen = true;
                     }
                     else
                     {
+                        
                         //重启获取管理员权限
                         UserAdmin.Upgrade();
                     }
                 }
-                Properties.Settings.Default.BootOpen = true;
+                
             }
             else
             {
@@ -73,40 +76,41 @@ namespace OneFuckOneTu
                     if (UserAdmin.AdminIsExists())
                     {
                         OnBoot.DeleteTask(taskname);
+                        Settings.Default.BootOpen = false;
                     }
                     else
                     {
+
                         //重启获取管理员权限
                         UserAdmin.Upgrade();
                     }
                 }
-                Properties.Settings.Default.BootOpen = false;
             }
 
             //更新壁纸保存
             if (checkBox2.Checked)
-                Properties.Settings.Default.SaveImage = true;
+                Settings.Default.SaveImage = true;
             else
-                Properties.Settings.Default.SaveImage = false;
+                Settings.Default.SaveImage = false;
 
 
             //更新壁纸退出
             if (checkBox3.Checked)
-                Properties.Settings.Default.UpdateClose = true;
+                Settings.Default.UpdateClose = true;
             else
-                Properties.Settings.Default.UpdateClose = false;
+                Settings.Default.UpdateClose = false;
 
             //分辨率选项
             if (radioButton1.Checked)
-                Properties.Settings.Default.Resolution = true;
+                Settings.Default.Resolution = true;
             else
-                Properties.Settings.Default.Resolution = false;
+                Settings.Default.Resolution = false;
 
 
             //空格键选择
-            Properties.Settings.Default.ComboBox = comboBox1.SelectedIndex;
+            Settings.Default.ComboBox = comboBox1.SelectedIndex;
             
-            Properties.Settings.Default.Save();
+            Settings.Default.Save();
 
         }
 
@@ -116,49 +120,48 @@ namespace OneFuckOneTu
         {
 
             //保存目录
-            if (String.Equals(Properties.Settings.Default.ImagePath, ""))
+            if (String.Equals(Settings.Default.ImagePath, ""))
                 textBox1.Text = "";
             else
-                textBox1.Text = Properties.Settings.Default.ImagePath;
+                textBox1.Text = Settings.Default.ImagePath;
 
 
             //开机启动
-            if (Properties.Settings.Default.BootOpen)
+            if (Settings.Default.BootOpen)
                 checkBox1.Checked = true;
             else
                 checkBox1.Checked = false;
             
 
             //自动保存壁纸
-            if (Properties.Settings.Default.SaveImage)
+            if (Settings.Default.SaveImage)
                 checkBox2.Checked = true;
             else
                 checkBox2.Checked = false;
 
             //更新壁纸自动推出
-            if (Properties.Settings.Default.UpdateClose)
+            if (Settings.Default.UpdateClose)
                 checkBox3.Checked = true;
             else
                 checkBox3.Checked = false;
 
             //分辨率选择，真为1920，假为1366
-            if (Properties.Settings.Default.Resolution)
+            if (Settings.Default.Resolution)
                 radioButton1.Checked = true;
             else
                 radioButton2.Checked = true;
 
             //快捷键选择
-            comboBox1.SelectedIndex = Properties.Settings.Default.ComboBox;
+            comboBox1.SelectedIndex = Settings.Default.ComboBox;
 
         }
 
-
-        private void dSkinCheckBox2_MouseClick(object sender, MouseEventArgs e)
+        private void checkBox2_MouseClick(object sender, MouseEventArgs e)
         {
             if (textBox1.Text.Length < 3)
             {
                 MessageBox.Show("需先设置路径");
-                checkBox2.Checked = true;
+                checkBox2.Checked = false;
             }
         }
     }
