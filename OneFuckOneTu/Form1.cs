@@ -87,6 +87,7 @@ namespace OneFuckOneTu
             }
             else
             {
+                //为空则判断是否有网络
                 if (UrlProcessing.ping())
                     htmlLabel.Text = "<span><div style='padding: 3px 4px; font: 9.5pt; '>" + "有网络但下载图片失败" + "</div></span>";
                 else

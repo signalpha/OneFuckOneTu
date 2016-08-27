@@ -77,7 +77,6 @@ namespace OneFuckOneTu
                     {
                         string strAssName = Application.ExecutablePath;
                         OnBoot.TaskCreate(taskname, strAssName);
-                        Settings.Default.BootOpen = true;
                     }
                     else
                     {
@@ -95,7 +94,6 @@ namespace OneFuckOneTu
                     if (UserAdmin.AdminIsExists())
                     {
                         OnBoot.DeleteTask(taskname);
-                        Settings.Default.BootOpen = false;
                     }
                     else
                     {
@@ -145,7 +143,7 @@ namespace OneFuckOneTu
 
 
             //开机启动
-            if (Settings.Default.BootOpen)
+            if (OnBoot.TaskIsExists("one_fuck_one_tu"))
                 checkBox1.Checked = true;
             else
                 checkBox1.Checked = false;

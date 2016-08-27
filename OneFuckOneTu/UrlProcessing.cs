@@ -24,7 +24,7 @@ namespace OneFuckOneTu
             }
             catch (Exception)
             {
-                ////判断是否联网
+                ////不再此处判断网络连接
                 //if (ping())
                 //    MessageBox.Show("有网络但图片获取失败，请联系作者");
                 //else

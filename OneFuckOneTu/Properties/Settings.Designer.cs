@@ -26,18 +26,6 @@ namespace OneFuckOneTu.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool BootOpen {
-            get {
-                return ((bool)(this["BootOpen"]));
-            }
-            set {
-                this["BootOpen"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool SaveImage {
             get {
                 return ((bool)(this["SaveImage"]));
