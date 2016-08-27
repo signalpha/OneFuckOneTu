@@ -19,11 +19,23 @@ namespace OneFuckOneTu
             textBox1.AutoSize = false;
             textBox1.Height = 26;
 
-            ToolTip tp = new ToolTip();
 
-            tp.SetToolTip(checkBox1, "需以管理员模式开启，不建议手动拨号上网的用户开启");
-            tp.SetToolTip(checkBox2, "每天保存一张壁纸，设置幻灯片放映也是个不错的选择");
-            tp.SetToolTip(checkBox3, "只在每天第一次打开软件时更新后自动退出");
+            Tips(checkBox1, "开机不会有UAC提示，首次启动需以管理员模式开启，不建议手动拨号上网的用户开启");
+            Tips(checkBox2, "每天保存一张壁纸，设置幻灯片放映也是个不错的选择");
+            Tips(checkBox3, "手动开启软件只在每天第一次开启时更新后自动退出");
+        }
+
+
+        //鼠标提示
+        public void Tips(CheckBox Checkbox, string TipsContent)
+        {
+            ToolTip ttpSettings = new ToolTip();
+            ttpSettings.InitialDelay = 200;
+            ttpSettings.AutoPopDelay = 10 * 1000;
+            ttpSettings.ReshowDelay = 200;
+            ttpSettings.ShowAlways = true;
+            ttpSettings.IsBalloon = true;
+            ttpSettings.SetToolTip(Checkbox, TipsContent);
         }
 
 
@@ -61,7 +73,6 @@ namespace OneFuckOneTu
                     }
                     else
                     {
-                        
                         //重启获取管理员权限
                         UserAdmin.Upgrade();
                     }
@@ -80,7 +91,6 @@ namespace OneFuckOneTu
                     }
                     else
                     {
-
                         //重启获取管理员权限
                         UserAdmin.Upgrade();
                     }

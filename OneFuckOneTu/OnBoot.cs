@@ -76,7 +76,7 @@ namespace OneFuckOneTu
             //设置操作
             IExecAction action = (IExecAction)task.Actions.Create(_TASK_ACTION_TYPE.TASK_ACTION_EXEC);
             action.Path = path; //计划任务调用的程序路径
-
+            action.Arguments = "1"; //配上参数，用来判断手动开启还是开机自启
 
             //其他设置
             task.Settings.ExecutionTimeLimit = "PT0S"; //运行任务时间超时停止任务吗? PTOS 不开启超时

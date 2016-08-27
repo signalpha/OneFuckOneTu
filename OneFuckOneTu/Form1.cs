@@ -13,9 +13,13 @@ namespace OneFuckOneTu
 
         TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel htmlLabel;
 
-        public Form1()
+        string[] arg;
+        public Form1(string[] args)
         {
             InitializeComponent();
+
+            //取启动参数
+            this.arg = args;
 
 
             //设置窗口大小
@@ -298,15 +302,28 @@ namespace OneFuckOneTu
             //更新壁纸自动退出被勾选
             if (Settings.Default.UpdateClose)
             {
-                //取今天的日期，和配置文件的日期判断是否相同，如果相同，则不是第一次打开，不执行退出。
-                string data = DateTime.Now.ToString("yyyyMMdd");
-                if (!data.Equals(Settings.Default.DataValue))
+
+                //先判断是手动开启还是开机自动开启
+                if (arg.Length != 0)
                 {
+                    //自动开启
                     设置图片为背景ToolStripMenuItem_Click(null, null);
-                    Settings.Default.DataValue = data;
-                    Settings.Default.Save();
                     Environment.Exit(0); //退出真个程序
                 }
+                else
+                {
+                    //手动开启，取今天的日期，和配置文件的日期判断是否相同，如果相同，则不是第一次打开，不执行退出。
+                    string data = DateTime.Now.ToString("yyyyMMdd");
+                    if (!data.Equals(Settings.Default.DataValue))
+                    {
+                        设置图片为背景ToolStripMenuItem_Click(null, null);
+                        Settings.Default.DataValue = data;
+                        Settings.Default.Save();
+                        Environment.Exit(0); //退出真个程序
+                    }
+                }
+
+                
             }
 
         }
