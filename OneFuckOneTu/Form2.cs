@@ -54,20 +54,15 @@ namespace OneFuckOneTu
             if (path != null)
             {
                 textBox1.Text = path;
+                //保存目录
+                Settings.Default.ImagePath = textBox1.Text;
             }
         }
 
-        
 
-        private void button3_Click(object sender, EventArgs e)
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-
-
-            //保存目录
-            Settings.Default.ImagePath = textBox1.Text;
-
-
-            //开机启动
+            //开机启启
             if (checkBox1.Checked)
             {
                 string taskname = "one_fuck_one_tu";
@@ -84,7 +79,7 @@ namespace OneFuckOneTu
                         UserAdmin.Upgrade();
                     }
                 }
-                
+
             }
             else
             {
@@ -102,7 +97,13 @@ namespace OneFuckOneTu
                     }
                 }
             }
+        }
 
+
+
+        //窗口关闭发生
+        private void Form2_FormClosed(object sender, FormClosedEventArgs e)
+        {
             //壁纸保存
             if (checkBox2.Checked)
                 Settings.Default.SaveImage = true;
@@ -125,9 +126,15 @@ namespace OneFuckOneTu
 
             //空格键选择
             Settings.Default.ComboBox = comboBox1.SelectedIndex;
-            
+
             Settings.Default.Save();
 
+        }
+
+        //超链接
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.signalpha.cn");
         }
 
 
@@ -172,11 +179,6 @@ namespace OneFuckOneTu
 
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-
-
-        }
+        
     }
 }

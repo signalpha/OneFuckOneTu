@@ -68,7 +68,7 @@ namespace OneFuckOneTu
                 }
                 catch (Exception)
                 {
-                    htmlLabel.Text = "<span><div style='padding: 3px 4px; font: 9.5pt; '>" + "出现异常，请尝试重新打开软件" + "</div></span>";
+                    htmlLabel.Text = "<span><div style='padding: 3px 5px; '>" + "出现异常，请尝试重新打开软件" + "</div></span>";
                     pictureBox1.Controls.Add(htmlLabel);
                     htmlLabel.Visible = true;
                     return;
@@ -78,9 +78,9 @@ namespace OneFuckOneTu
                 url = "http://cn.bing.com/cnhp/coverstory/";
                 zheng = "\"para1\":\"(?<para1>.*?)\",\"para2\":\"";
                 content = up.UrlParsing(url, zheng, 1);
-                htmlLabel.Text = "<span><div style='padding: 3px 4px; font: 9.5pt; '>" + content + "</div></span>";
+                
+                htmlLabel.Text = "<span><div style='padding: 3px 5px; line-height:23px;'>" + content + "</div></span>";
                 pictureBox1.Controls.Add(htmlLabel);
-
                 //取配置处理
                 UserConfigProcessing(); 
 
@@ -89,9 +89,9 @@ namespace OneFuckOneTu
             {
                 //为空则判断是否有网络
                 if (UrlProcessing.ping())
-                    htmlLabel.Text = "<span><div style='padding: 3px 4px; font: 9.5pt; '>" + "有网络但下载图片失败，请尝试重新打开软件" + "</div></span>";
+                    htmlLabel.Text = "<span><div style='padding: 3px 5px; '>" + "有网络但下载图片失败，请尝试重新打开软件" + "</div></span>";
                 else
-                    htmlLabel.Text = "<span><div style='padding: 3px 4px; font: 9.5pt; '>" + "无网络链接，图片获取失败" + "</div></span>";
+                    htmlLabel.Text = "<span><div style='padding: 3px 5px; '>" + "无网络链接，图片获取失败" + "</div></span>";
 
                 pictureBox1.Controls.Add(htmlLabel);
                 htmlLabel.Visible = true;
