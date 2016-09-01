@@ -20,7 +20,7 @@ namespace OneFuckOneTu
             textBox1.Height = 26;
 
 
-            Tips(checkBox1, "开机不会有UAC提示，首次启动需以管理员模式开启，不建议手动拨号上网的用户开启");
+            Tips(checkBox1, "开机不会有UAC提示，首次启动需以管理员模式开启");
             Tips(checkBox2, "每天保存一张壁纸，设置幻灯片放映也是个不错的选择");
             Tips(checkBox3, "手动开启软件只在每天第一次开启时更新后自动退出");
         }
@@ -172,6 +172,11 @@ namespace OneFuckOneTu
 
         }
 
-        
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+
+
+        }
     }
 }
