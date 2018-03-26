@@ -33,10 +33,19 @@ namespace OneFuckOneTu
             htmlLabel.BorderStyle = BorderStyle.Fixed3D;
 
 
-            string zheng = @"(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?.jpg";
+            //string zheng = @"(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?.jpg";
+            string zheng = "\"url\":(.*?(jpg|jpeg|gif|png))";
+
             string url = "http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1";
+
             UrlProcessing up = new UrlProcessing();
-            string content = up.UrlParsing(url,zheng,0);
+            string content = up.UrlParsing(url, zheng,0);
+
+
+            //截取地址
+            string zurl = content.Substring(7);
+
+            content = "http://www.bing.com" + zurl;
 
             if (content != null)
             {

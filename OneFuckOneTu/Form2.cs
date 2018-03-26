@@ -134,7 +134,7 @@ namespace OneFuckOneTu
         //超链接
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://www.signalpha.cn");
+            System.Diagnostics.Process.Start("http://www.signalpha.cn/2016/09/01/OneFuckOneTu/");
         }
 
 

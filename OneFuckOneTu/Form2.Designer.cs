@@ -182,11 +182,11 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.label4.Location = new System.Drawing.Point(272, 194);
+            this.label4.Location = new System.Drawing.Point(262, 195);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(113, 17);
+            this.label4.Size = new System.Drawing.Size(119, 17);
             this.label4.TabIndex = 33;
-            this.label4.Text = "当前软件版本：1.0 ";
+            this.label4.Text = "当前软件版本：1.0.1";
             // 
             // linkLabel1
             // 
